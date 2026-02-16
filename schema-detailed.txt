@@ -1,0 +1,325 @@
+=== Table: action ===
+                            Table "public.action"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ card_id    | bigint                      |           | not null | 
+ user_id    | bigint                      |           | not null | 
+ type       | text                        |           | not null | 
+ data       | jsonb                       |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+Indexes:
+    "action_pkey" PRIMARY KEY, btree (id)
+    "action_card_id_index" btree (card_id)
+    "action_type_index" btree (type)
+
+
+=== Table: archive ===
+                               Table "public.archive"
+       Column       |            Type             | Collation | Nullable |  Default  
+--------------------+-----------------------------+-----------+----------+-----------
+ id                 | bigint                      |           | not null | next_id()
+ from_model         | text                        |           | not null | 
+ original_record_id | bigint                      |           | not null | 
+ original_record    | json                        |           | not null | 
+ created_at         | timestamp without time zone |           |          | 
+ updated_at         | timestamp without time zone |           |          | 
+Indexes:
+    "archive_pkey" PRIMARY KEY, btree (id)
+    "archive_from_model_original_record_id_unique" UNIQUE CONSTRAINT, btree (from_model, original_record_id)
+
+
+=== Table: attachment ===
+                            Table "public.attachment"
+     Column      |            Type             | Collation | Nullable |  Default  
+-----------------+-----------------------------+-----------+----------+-----------
+ id              | bigint                      |           | not null | next_id()
+ card_id         | bigint                      |           | not null | 
+ creator_user_id | bigint                      |           | not null | 
+ dirname         | text                        |           | not null | 
+ filename        | text                        |           | not null | 
+ name            | text                        |           | not null | 
+ created_at      | timestamp without time zone |           |          | 
+ updated_at      | timestamp without time zone |           |          | 
+ image           | jsonb                       |           |          | 
+Indexes:
+    "attachment_pkey" PRIMARY KEY, btree (id)
+    "attachment_card_id_index" btree (card_id)
+
+
+=== Table: board ===
+                            Table "public.board"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ project_id | bigint                      |           | not null | 
+ position   | double precision            |           | not null | 
+ name       | text                        |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+Indexes:
+    "board_pkey" PRIMARY KEY, btree (id)
+    "board_position_index" btree ("position")
+    "board_project_id_index" btree (project_id)
+
+
+=== Table: board_membership ===
+                       Table "public.board_membership"
+   Column    |            Type             | Collation | Nullable |  Default  
+-------------+-----------------------------+-----------+----------+-----------
+ id          | bigint                      |           | not null | next_id()
+ board_id    | bigint                      |           | not null | 
+ user_id     | bigint                      |           | not null | 
+ created_at  | timestamp without time zone |           |          | 
+ updated_at  | timestamp without time zone |           |          | 
+ role        | text                        |           | not null | 
+ can_comment | boolean                     |           |          | 
+Indexes:
+    "board_membership_pkey" PRIMARY KEY, btree (id)
+    "board_membership_board_id_user_id_unique" UNIQUE CONSTRAINT, btree (board_id, user_id)
+    "board_membership_user_id_index" btree (user_id)
+
+
+=== Table: card ===
+                                  Table "public.card"
+        Column         |            Type             | Collation | Nullable |  Default  
+-----------------------+-----------------------------+-----------+----------+-----------
+ id                    | bigint                      |           | not null | next_id()
+ board_id              | bigint                      |           | not null | 
+ list_id               | bigint                      |           | not null | 
+ creator_user_id       | bigint                      |           | not null | 
+ cover_attachment_id   | bigint                      |           |          | 
+ position              | double precision            |           |          | 
+ name                  | text                        |           | not null | 
+ description           | text                        |           |          | 
+ due_date              | timestamp without time zone |           |          | 
+ stopwatch             | jsonb                       |           |          | 
+ created_at            | timestamp without time zone |           |          | 
+ updated_at            | timestamp without time zone |           |          | 
+ is_due_date_completed | boolean                     |           |          | 
+ estimated_hours       | character varying(255)      |           |          | 
+ actual_hours          | character varying(255)      |           |          | 
+ complexity            | character varying(255)      |           |          | 
+ priority              | character varying(255)      |           |          | 
+ percent_complete      | integer                     |           |          | 
+ is_blocked            | boolean                     |           |          | false
+ start_date            | timestamp without time zone |           |          | 
+ end_date              | timestamp without time zone |           |          | 
+Indexes:
+    "card_pkey" PRIMARY KEY, btree (id)
+    "card_board_id_index" btree (board_id)
+    "card_list_id_index" btree (list_id)
+    "card_position_index" btree ("position")
+Check constraints:
+    "card_complexity_check" CHECK (complexity::text = ANY (ARRAY['high'::character varying::text, 'medium'::character varying::text, 'low'::character varying::text]))
+    "card_percent_complete_check" CHECK (percent_complete >= 0 AND percent_complete <= 100)
+    "card_priority_check" CHECK (priority::text = ANY (ARRAY['urgent'::character varying::text, 'high'::character varying::text, 'medium'::character varying::text, 'low'::character varying::text]))
+
+
+=== Table: card_label ===
+                          Table "public.card_label"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ card_id    | bigint                      |           | not null | 
+ label_id   | bigint                      |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+Indexes:
+    "card_label_pkey" PRIMARY KEY, btree (id)
+    "card_label_card_id_label_id_unique" UNIQUE CONSTRAINT, btree (card_id, label_id)
+    "card_label_label_id_index" btree (label_id)
+
+
+=== Table: card_membership ===
+                       Table "public.card_membership"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ card_id    | bigint                      |           | not null | 
+ user_id    | bigint                      |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+Indexes:
+    "card_membership_pkey" PRIMARY KEY, btree (id)
+    "card_membership_card_id_user_id_unique" UNIQUE CONSTRAINT, btree (card_id, user_id)
+    "card_membership_user_id_index" btree (user_id)
+
+
+=== Table: card_subscription ===
+                       Table "public.card_subscription"
+    Column    |            Type             | Collation | Nullable |  Default  
+--------------+-----------------------------+-----------+----------+-----------
+ id           | bigint                      |           | not null | next_id()
+ card_id      | bigint                      |           | not null | 
+ user_id      | bigint                      |           | not null | 
+ is_permanent | boolean                     |           | not null | 
+ created_at   | timestamp without time zone |           |          | 
+ updated_at   | timestamp without time zone |           |          | 
+Indexes:
+    "card_subscription_pkey" PRIMARY KEY, btree (id)
+    "card_subscription_card_id_user_id_unique" UNIQUE CONSTRAINT, btree (card_id, user_id)
+    "card_subscription_user_id_index" btree (user_id)
+
+
+=== Table: identity_provider_user ===
+                    Table "public.identity_provider_user"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ user_id    | bigint                      |           | not null | 
+ issuer     | text                        |           | not null | 
+ sub        | text                        |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+Indexes:
+    "identity_provider_user_pkey" PRIMARY KEY, btree (id)
+    "identity_provider_user_issuer_sub_unique" UNIQUE CONSTRAINT, btree (issuer, sub)
+    "identity_provider_user_user_id_index" btree (user_id)
+
+
+=== Table: label ===
+                            Table "public.label"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ board_id   | bigint                      |           | not null | 
+ name       | text                        |           |          | 
+ color      | text                        |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+ position   | double precision            |           | not null | 
+Indexes:
+    "label_pkey" PRIMARY KEY, btree (id)
+    "label_board_id_index" btree (board_id)
+    "label_position_index" btree ("position")
+
+
+=== Table: list ===
+                             Table "public.list"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ board_id   | bigint                      |           | not null | 
+ position   | double precision            |           | not null | 
+ name       | text                        |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+Indexes:
+    "list_pkey" PRIMARY KEY, btree (id)
+    "list_board_id_index" btree (board_id)
+    "list_position_index" btree ("position")
+
+
+=== Table: notification ===
+                         Table "public.notification"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ user_id    | bigint                      |           | not null | 
+ action_id  | bigint                      |           | not null | 
+ card_id    | bigint                      |           | not null | 
+ is_read    | boolean                     |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+Indexes:
+    "notification_pkey" PRIMARY KEY, btree (id)
+    "notification_action_id_index" btree (action_id)
+    "notification_card_id_index" btree (card_id)
+    "notification_is_read_index" btree (is_read)
+    "notification_user_id_index" btree (user_id)
+
+
+=== Table: project ===
+                              Table "public.project"
+      Column      |            Type             | Collation | Nullable |  Default  
+------------------+-----------------------------+-----------+----------+-----------
+ id               | bigint                      |           | not null | next_id()
+ name             | text                        |           | not null | 
+ background       | jsonb                       |           |          | 
+ created_at       | timestamp without time zone |           |          | 
+ updated_at       | timestamp without time zone |           |          | 
+ background_image | jsonb                       |           |          | 
+Indexes:
+    "project_pkey" PRIMARY KEY, btree (id)
+
+
+=== Table: project_manager ===
+                       Table "public.project_manager"
+   Column   |            Type             | Collation | Nullable |  Default  
+------------+-----------------------------+-----------+----------+-----------
+ id         | bigint                      |           | not null | next_id()
+ project_id | bigint                      |           | not null | 
+ user_id    | bigint                      |           | not null | 
+ created_at | timestamp without time zone |           |          | 
+ updated_at | timestamp without time zone |           |          | 
+Indexes:
+    "project_manager_pkey" PRIMARY KEY, btree (id)
+    "project_manager_project_id_user_id_unique" UNIQUE CONSTRAINT, btree (project_id, user_id)
+    "project_manager_user_id_index" btree (user_id)
+
+
+=== Table: session ===
+                              Table "public.session"
+     Column      |            Type             | Collation | Nullable |  Default  
+-----------------+-----------------------------+-----------+----------+-----------
+ id              | bigint                      |           | not null | next_id()
+ user_id         | bigint                      |           | not null | 
+ access_token    | text                        |           | not null | 
+ remote_address  | text                        |           | not null | 
+ user_agent      | text                        |           |          | 
+ created_at      | timestamp without time zone |           |          | 
+ updated_at      | timestamp without time zone |           |          | 
+ deleted_at      | timestamp without time zone |           |          | 
+ http_only_token | text                        |           |          | 
+Indexes:
+    "session_pkey" PRIMARY KEY, btree (id)
+    "session_access_token_unique" UNIQUE CONSTRAINT, btree (access_token)
+    "session_remote_address_index" btree (remote_address)
+    "session_user_id_index" btree (user_id)
+
+
+=== Table: task ===
+                              Table "public.task"
+    Column    |            Type             | Collation | Nullable |  Default  
+--------------+-----------------------------+-----------+----------+-----------
+ id           | bigint                      |           | not null | next_id()
+ card_id      | bigint                      |           | not null | 
+ name         | text                        |           | not null | 
+ is_completed | boolean                     |           | not null | 
+ created_at   | timestamp without time zone |           |          | 
+ updated_at   | timestamp without time zone |           |          | 
+ position     | double precision            |           | not null | 
+Indexes:
+    "task_pkey" PRIMARY KEY, btree (id)
+    "task_card_id_index" btree (card_id)
+    "task_position_index" btree ("position")
+
+
+=== Table: user_account ===
+                               Table "public.user_account"
+         Column         |            Type             | Collation | Nullable |  Default  
+------------------------+-----------------------------+-----------+----------+-----------
+ id                     | bigint                      |           | not null | next_id()
+ email                  | text                        |           | not null | 
+ password               | text                        |           |          | 
+ is_admin               | boolean                     |           | not null | 
+ name                   | text                        |           | not null | 
+ username               | text                        |           |          | 
+ phone                  | text                        |           |          | 
+ organization           | text                        |           |          | 
+ subscribe_to_own_cards | boolean                     |           | not null | 
+ created_at             | timestamp without time zone |           |          | 
+ updated_at             | timestamp without time zone |           |          | 
+ deleted_at             | timestamp without time zone |           |          | 
+ language               | text                        |           |          | 
+ password_changed_at    | timestamp without time zone |           |          | 
+ avatar                 | jsonb                       |           |          | 
+ is_sso                 | boolean                     |           | not null | 
+Indexes:
+    "user_account_pkey" PRIMARY KEY, btree (id)
+    "user_email_unique" EXCLUDE USING btree (email WITH =) WHERE (deleted_at IS NULL)
+    "user_username_unique" EXCLUDE USING btree (username WITH =) WHERE (username IS NOT NULL AND deleted_at IS NULL)
+
+

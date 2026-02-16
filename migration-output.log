@@ -1,0 +1,52 @@
+🚀 Starting full database migration...
+
+✅ Connected to Supabase!
+
+🗑️  Cleaning schema...
+   ✓ Schema ready
+
+📖 Reading migration file...
+📝 Parsing SQL statements...
+
+   ✓ Sequences: 0
+   ✓ Functions: 0
+   ✓ Tables: 0
+   ✓ Inserts: 1917
+   ✓ Constraints: 0
+   ✓ Indexes: 0
+
+🏗️  Creating database objects...
+
+   Creating sequences...
+   Creating functions...
+   Creating tables...
+
+📦 Inserting data...
+
+   ⚠️  Insert error: relation "project_management_tool.action" does not exist
+   ⚠️  Insert error: relation "project_management_tool.action" does not exist
+   ⚠️  Insert error: relation "project_management_tool.action" does not exist
+   ⚠️  Insert error: relation "project_management_tool.action" does not exist
+
+   ✓ Inserted 0 rows (1917 errors)
+
+🔗 Adding constraints...
+   ✓ Constraints added
+
+📇 Creating indexes...
+   ✓ Indexes created
+
+🔍 Verifying migration...
+
+   ✓ Tables created: 0
+   ⚠️  user_account: relation "project_management_tool.user_account" do
+   ⚠️  project: relation "project_management_tool.project" does no
+   ⚠️  board: relation "project_management_tool.board" does not 
+   ⚠️  list: relation "project_management_tool.list" does not e
+   ⚠️  card: relation "project_management_tool.card" does not e
+   ⚠️  task: relation "project_management_tool.task" does not e
+   ⚠️  action: relation "project_management_tool.action" does not
+   ⚠️  notification: relation "project_management_tool.notification" do
+
+🎉 Migration completed successfully!
+

@@ -1,0 +1,22 @@
+       table_name       | column_count 
+------------------------+--------------
+ action                 |            7
+ archive                |            6
+ attachment             |            9
+ board                  |            6
+ board_membership       |            7
+ card                   |           21
+ card_label             |            5
+ card_membership        |            5
+ card_subscription      |            6
+ identity_provider_user |            6
+ label                  |            7
+ list                   |            6
+ notification           |            7
+ project                |            6
+ project_manager        |            5
+ session                |            9
+ task                   |            7
+ user_account           |           16
+(18 rows)
+
