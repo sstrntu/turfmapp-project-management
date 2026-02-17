@@ -184,6 +184,14 @@ export default {
       loading: 'Loading...',
       unknown: 'Unknown',
       untitled: 'Untitled',
+      voiceAssistant: 'Voice Assistant',
+      startListening: 'Start listening',
+      stopListening: 'Stop listening',
+      voiceConnected: 'Connected',
+      listening: 'Listening...',
+      speaking: 'Speaking...',
+      voiceError: 'Error. Try again.',
+      voicePlaceholder: 'Say something like "What lists are on this board?"',
     },
 
     action: {

@@ -64,6 +64,7 @@
     }
   },
   "dependencies": {
+    "@11labs/client": "^0.2.0",
     "@juggle/resize-observer": "^3.4.0",
     "classnames": "^2.5.1",
     "date-fns": "^2.30.0",

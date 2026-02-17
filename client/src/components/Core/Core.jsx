@@ -11,6 +11,7 @@ import UserSettingsModalContainer from '../../containers/UserSettingsModalContai
 import ProjectAddModalContainer from '../../containers/ProjectAddModalContainer';
 import ArchivedItemsContainer from '../../containers/ArchivedItemsContainer';
 import Background from '../Background';
+import VoiceAssistant from '../VoiceAssistant';
 
 import styles from './Core.module.scss';
 
@@ -68,6 +69,7 @@ const Core = React.memo(
             </div>
           </div>
         )}
+        {currentBoard && <VoiceAssistant />}
       </>
     );
   },

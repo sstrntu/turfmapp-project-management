@@ -173,6 +173,14 @@ export default {
       version: 'Version',
       viewer: 'Viewer',
       writeComment: 'Write a comment...',
+      voiceAssistant: 'Voice Assistant',
+      startListening: 'Start listening',
+      stopListening: 'Stop listening',
+      voiceConnected: 'Connected',
+      listening: 'Listening...',
+      speaking: 'Speaking...',
+      voiceError: 'Error. Try again.',
+      voicePlaceholder: 'Say something like "What lists are on this board?"',
     },
 
     action: {

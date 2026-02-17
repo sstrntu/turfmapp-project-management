@@ -1,21 +1,25 @@
-version: '3'
+name: turfmapp
 
 services:
   # Frontend (React Client)
   turfmapp-client:
     build:
       context: ./client
-      dockerfile: Dockerfile
+      dockerfile: ../config/development/Dockerfile.client
     container_name: turfmapp-client
     restart: on-failure
     volumes:
-      - ./client:/app
+      - ./client:/app/client
       - /app/node_modules
+      - /app/client/node_modules
     ports:
       - 3000:3000
     environment:
       - REACT_APP_SERVER_BASE_URL=http://localhost:9000
+      - REACT_APP_ELEVENLABS_AGENT_ID=agent_6601khmmm2r9ed0rdnjhr46a34mp
       - CHOKIDAR_USEPOLLING=true
+    working_dir: /app/client
+    command: npm start
     networks:
       - shared_network
     depends_on:
@@ -23,7 +27,9 @@ services:
 
   # Backend (API Server)
   turfmapp-server:
-    image: turfmapp-server:latest
+    build:
+      context: ./server
+      dockerfile: ../config/development/Dockerfile.server
     container_name: turfmapp-server
     command: sh -c "node db/init.js && node app.js --prod"
     restart: on-failure
@@ -67,7 +73,6 @@ services:
       - S3_SECRET_ACCESS_KEY=8a144d9d6b3b79bfb107693c35db5d861842f37b8c968f39f817403850341ad4
       - S3_BUCKET=project-management-tool
       - S3_FORCE_PATH_STYLE=true
-
       # - OIDC_ISSUER=
       # - OIDC_CLIENT_ID=
       # - OIDC_CLIENT_SECRET=
