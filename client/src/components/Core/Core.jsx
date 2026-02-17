@@ -69,7 +69,7 @@ const Core = React.memo(
             </div>
           </div>
         )}
-        {currentBoard && <VoiceAssistant />}
+        {!isInitializing && <VoiceAssistant />}
       </>
     );
   },

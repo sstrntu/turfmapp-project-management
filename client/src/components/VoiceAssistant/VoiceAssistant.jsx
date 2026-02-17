@@ -56,6 +56,26 @@ function VoiceAssistant() {
           const result = await actionHandler.get_cards_by_user(params);
           return result;
         },
+        get_workload_summary: async () => {
+          const result = await actionHandler.get_workload_summary();
+          return result;
+        },
+        get_overdue_cards: async () => {
+          const result = await actionHandler.get_overdue_cards();
+          return result;
+        },
+        get_user_projects: async (params) => {
+          const result = await actionHandler.get_user_projects(params);
+          return result;
+        },
+        get_project_summary: async (params) => {
+          const result = await actionHandler.get_project_summary(params);
+          return result;
+        },
+        get_all_projects_overview: async () => {
+          const result = await actionHandler.get_all_projects_overview();
+          return result;
+        },
       };
       /* eslint-enable no-param-reassign */
     },

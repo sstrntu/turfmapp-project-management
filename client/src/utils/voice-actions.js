@@ -3,6 +3,7 @@ import { createSelector } from 'redux-orm';
 import orm from '../orm';
 import { selectPath } from '../selectors/router';
 import entryActions from '../entry-actions';
+import { getAnalytics } from '../api/analytics';
 
 function findListByName(lists, name) {
   const lower = name.toLowerCase();
@@ -236,6 +237,210 @@ export default function createVoiceActionHandler(store) {
       if (matches.length === 0) return `No cards found assigned to "${userName}".`;
 
       return matches.map((c) => `"${c.name}" in ${c.listName}`).join(', ');
+    },
+
+    get_workload_summary: async () => {
+      try {
+        const data = await getAnalytics();
+        const { cards, cardMemberships, users, boards, lists } = data;
+
+        const userCardCount = {};
+        cardMemberships.forEach((cm) => {
+          userCardCount[cm.userId] = (userCardCount[cm.userId] || 0) + 1;
+        });
+
+        const ranked = users
+          .map((u) => ({ name: u.name, username: u.username, count: userCardCount[u.id] || 0 }))
+          .sort((a, b) => b.count - a.count);
+
+        if (ranked.length === 0) {
+          return 'No users with assigned cards found.';
+        }
+
+        const now = new Date();
+        const overdueCount = cards.filter((c) => c.dueDate && new Date(c.dueDate) < now).length;
+
+        const lines = ranked.map(
+          (u, i) => `${i + 1}. ${u.name} (@${u.username}): ${u.count} cards`,
+        );
+
+        return `Workload across ${boards.length} boards, ${cards.length} total cards (${overdueCount} overdue), ${lists.length} lists:\n\n${lines.join('\n')}`;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Analytics error:', e);
+        return `Failed to fetch analytics data: ${e?.message || String(e)}`;
+      }
+    },
+
+    get_overdue_cards: async () => {
+      try {
+        const data = await getAnalytics();
+        const { cards, cardMemberships, users, boards, lists } = data;
+
+        const now = new Date();
+        const overdue = cards.filter((c) => c.dueDate && new Date(c.dueDate) < now);
+
+        if (overdue.length === 0) {
+          return 'No overdue cards found across all boards.';
+        }
+
+        const boardMap = {};
+        boards.forEach((b) => { boardMap[b.id] = b.name; });
+        const listMap = {};
+        lists.forEach((l) => { listMap[l.id] = l.name; });
+        const userMap = {};
+        users.forEach((u) => { userMap[u.id] = u.name; });
+
+        const cardAssignees = {};
+        cardMemberships.forEach((cm) => {
+          if (!cardAssignees[cm.cardId]) { cardAssignees[cm.cardId] = []; }
+          cardAssignees[cm.cardId].push(userMap[cm.userId] || 'Unknown');
+        });
+
+        const lines = overdue.map((c) => {
+          const assignees = cardAssignees[c.id];
+          const assigneeStr = assignees && assignees.length > 0
+            ? ` [assigned to: ${assignees.join(', ')}]`
+            : '';
+          return `- "${c.name}" in ${listMap[c.listId] || 'Unknown list'} (${boardMap[c.boardId] || 'Unknown board'}) due: ${c.dueDate}${assigneeStr}`;
+        });
+
+        return `${overdue.length} overdue cards:\n\n${lines.join('\n')}`;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Analytics error:', e);
+        return `Failed to fetch analytics data: ${e?.message || String(e)}`;
+      }
+    },
+
+    get_user_projects: async ({ userName }) => {
+      try {
+        const data = await getAnalytics();
+        const { projects, boards, cards, cardMemberships, users } = data;
+
+        const lower = userName.toLowerCase();
+        const user = users.find(
+          (u) =>
+            u.name.toLowerCase().includes(lower) || u.username.toLowerCase().includes(lower),
+        );
+
+        if (!user) {
+          return `No user found matching "${userName}". Available users: ${users.map((u) => u.name).join(', ')}`;
+        }
+
+        const userCardIds = new Set(
+          cardMemberships.filter((cm) => cm.userId === user.id).map((cm) => cm.cardId),
+        );
+        const userBoardIds = new Set(
+          cards.filter((c) => userCardIds.has(c.id)).map((c) => c.boardId),
+        );
+
+        const boardMap = {};
+        boards.forEach((b) => { boardMap[b.id] = b; });
+        const projectBoardsMap = {};
+        userBoardIds.forEach((bid) => {
+          const board = boardMap[bid];
+          if (board) {
+            if (!projectBoardsMap[board.projectId]) { projectBoardsMap[board.projectId] = []; }
+            projectBoardsMap[board.projectId].push(board.name);
+          }
+        });
+
+        const projectMap = {};
+        projects.forEach((p) => { projectMap[p.id] = p.name; });
+
+        const projectEntries = Object.entries(projectBoardsMap);
+        if (projectEntries.length === 0) {
+          return `${user.name} (@${user.username}) has no card assignments across any projects.`;
+        }
+
+        const lines = projectEntries.map(
+          ([pid, boardNames]) =>
+            `- ${projectMap[pid] || 'Unknown project'}: ${boardNames.join(', ')}`,
+        );
+
+        return `${user.name} (@${user.username}) is involved in ${projectEntries.length} projects with ${userCardIds.size} cards:\n\n${lines.join('\n')}`;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Analytics error:', e);
+        return `Failed to fetch analytics data: ${e?.message || String(e)}`;
+      }
+    },
+
+    get_project_summary: async ({ projectName }) => {
+      try {
+        const data = await getAnalytics();
+        const { projects, boards, lists, cards, cardMemberships, users } = data;
+
+        const lower = projectName.toLowerCase();
+        const project = projects.find((p) => p.name.toLowerCase().includes(lower));
+
+        if (!project) {
+          return `No project found matching "${projectName}". Available projects: ${projects.map((p) => p.name).join(', ')}`;
+        }
+
+        const projectBoards = boards.filter((b) => b.projectId === project.id);
+        const boardIds = new Set(projectBoards.map((b) => b.id));
+        const projectLists = lists.filter((l) => boardIds.has(l.boardId));
+        const projectCards = cards.filter((c) => boardIds.has(c.boardId));
+
+        const now = new Date();
+        const overdueCount = projectCards.filter(
+          (c) => c.dueDate && new Date(c.dueDate) < now,
+        ).length;
+
+        const listMap = {};
+        projectLists.forEach((l) => { listMap[l.id] = l; });
+        const boardMap = {};
+        projectBoards.forEach((b) => { boardMap[b.id] = b.name; });
+
+        const boardSummaries = projectBoards.map((board) => {
+          const bLists = projectLists.filter((l) => l.boardId === board.id);
+          const listLines = bLists.map((l) => {
+            const listCards = projectCards.filter((c) => c.listId === l.id);
+            return `    - ${l.name}: ${listCards.length} cards`;
+          });
+          const bCards = projectCards.filter((c) => c.boardId === board.id);
+          return `  ${board.name} (${bCards.length} cards):\n${listLines.join('\n')}`;
+        });
+
+        return `Project: ${project.name}\n${projectBoards.length} boards, ${projectCards.length} total cards (${overdueCount} overdue)\n\n${boardSummaries.join('\n\n')}`;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Analytics error:', e);
+        return `Failed to fetch analytics data: ${e?.message || String(e)}`;
+      }
+    },
+
+    get_all_projects_overview: async () => {
+      try {
+        const data = await getAnalytics();
+        const { projects, boards, cards } = data;
+
+        if (projects.length === 0) {
+          return 'No projects found.';
+        }
+
+        const now = new Date();
+
+        const lines = projects.map((project) => {
+          const projectBoards = boards.filter((b) => b.projectId === project.id);
+          const boardIds = new Set(projectBoards.map((b) => b.id));
+          const projectCards = cards.filter((c) => boardIds.has(c.boardId));
+          const overdueCount = projectCards.filter(
+            (c) => c.dueDate && new Date(c.dueDate) < now,
+          ).length;
+
+          const overdueStr = overdueCount > 0 ? `, ${overdueCount} overdue` : '';
+          return `- ${project.name}: ${projectBoards.length} boards, ${projectCards.length} cards${overdueStr}`;
+        });
+
+        return `${projects.length} projects:\n\n${lines.join('\n')}`;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Analytics error:', e);
+        return `Failed to fetch analytics data: ${e?.message || String(e)}`;
+      }
     },
   };
 }

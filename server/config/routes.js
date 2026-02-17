@@ -138,6 +138,8 @@ module.exports.routes = {
   'GET /api/notifications/:id': 'notifications/show',
   'PATCH /api/notifications/:ids': 'notifications/update',
 
+  'GET /api/analytics': 'analytics/index',
+
   'GET /api/archives': 'archives/index',
 
   'GET /user-avatars/*': {
