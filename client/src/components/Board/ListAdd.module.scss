@@ -5,29 +5,30 @@
   }
 
   .controls {
-    margin-top: 4px;
+    margin-top: var(--space-050);
   }
 
   .field {
+    background: var(--color-bg-card);
     border: none;
-    border-radius: 3px;
-    box-shadow: 0 1px 0 #ccc;
-    color: #333;
+    border-radius: var(--radius-100);
+    box-shadow: var(--shadow-raised);
+    color: var(--color-text-primary);
     outline: none;
     overflow: hidden;
     width: 100%;
 
     &:focus {
-      border-color: #298fca;
-      box-shadow: 0 0 2px #298fca;
+      border-color: var(--color-accent-blue);
+      box-shadow: 0 0 0 2px var(--color-accent-blue);
     }
   }
 
   .wrapper {
-    background: #e2e4e6;
-    border-radius: 3px;
-    padding: 4px;
+    background: var(--color-bg-list);
+    border-radius: var(--radius-200);
+    padding: var(--space-050);
     transition: opacity 40ms ease-in;
-    width: 272px;
+    width: var(--list-width);
   }
 }

@@ -1,30 +1,31 @@
 :global(#app) {
   .actionButton {
-    background: #ebeef0;
-    box-shadow: 0 1px 0 0 rgba(9, 30, 66, 0.13);
-    color: #444;
-    margin-top: 8px;
+    background: #f0f1f3;
+    border-radius: var(--radius-100);
+    box-shadow: none;
+    color: #172b4d;
+    margin-top: var(--space-100);
     overflow: hidden;
     padding: 6px 8px 6px 18px;
     text-align: left;
     text-overflow: ellipsis;
-    transition: background 85ms ease;
+    transition: background var(--transition-fast);
     white-space: nowrap;
 
     &:hover {
-      background: #dfe3e6;
-      box-shadow: 0 1px 0 0 rgba(9, 30, 66, 0.25);
-      color: #4c4c4c;
+      background: #e8eaed;
+      box-shadow: none;
+      color: #172b4d;
     }
   }
 
   .actionIcon {
-    color: #17394d;
-    margin-right: 8px;
+    color: #6b808c;
+    margin-right: var(--space-100);
   }
 
   .actions {
-    margin-bottom: 24px;
+    margin-bottom: var(--space-300);
 
     @media only screen and (max-width: 797px) {
       flex: 1;
@@ -38,10 +39,10 @@
 
   .actionsTitle {
     color: #8c8c8c;
-    font-size: 12px;
-    font-weight: normal;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
     letter-spacing: 0.04em;
-    margin-top: 16px;
+    margin-top: var(--space-200);
     text-transform: uppercase;
     line-height: 20px;
     margin-bottom: -4px;
@@ -66,20 +67,22 @@
 
   .attachments {
     display: inline-block;
-    margin: 0 8px 8px 0;
+    margin: 0 var(--space-100) var(--space-100) 0;
     max-width: 100%;
     vertical-align: top;
   }
 
   .contentModule {
-    margin-bottom: 24px;
+    margin-bottom: var(--space-300);
   }
 
   .contentPadding {
-    padding: 8px 8px 0 16px;
+    padding: var(--space-100) var(--space-100) 0 var(--space-200);
+    border-right: 1px solid #e2e4e6;
 
     @media only screen and (max-width: 797px) {
-      padding-right: 16px;
+      border-right: none;
+      padding-right: var(--space-200);
       width: 100% !important;
     }
   }
@@ -89,43 +92,44 @@
   }
 
   .dueDate {
-    background: rgba(9, 30, 66, 0.04);
+    background: #f5f6f7;
     border: none;
-    border-radius: 3px;
+    border-radius: var(--radius-100);
     color: #6b808c;
     cursor: pointer;
     line-height: 20px;
     outline: none;
     padding: 6px 14px;
     text-align: left;
-    text-decoration: underline;
-    transition: background 0.3s ease;
+    text-decoration: none;
+    transition: background var(--transition-fast);
     vertical-align: top;
 
     &:hover {
-      background: rgba(9, 30, 66, 0.08);
-      color: #17394d;
+      background: #ebeef0;
+      color: #172b4d;
     }
   }
 
   .descriptionButton {
-    background: rgba(9, 30, 66, 0.04);
+    background: #f5f6f7;
     border: none;
-    border-radius: 3px;
+    border-radius: var(--radius-100);
     display: block;
-    color: #6b808c;
+    color: #8c8c8c;
     cursor: pointer;
     min-height: 54px;
     outline: none;
-    padding: 8px 12px;
+    padding: var(--space-100) var(--space-150);
     position: relative;
     text-align: left;
     text-decoration: none;
+    transition: background var(--transition-fast);
     width: 100%;
 
     &:hover {
-      background: rgba(9, 30, 66, 0.08);
-      color: #092d42;
+      background: #ebeef0;
+      color: #172b4d;
     }
   }
 
@@ -137,8 +141,8 @@
   .descriptionText {
     background: transparent;
     border: none;
-    color: #17394d;
-    margin-bottom: 8px;
+    color: #172b4d;
+    margin-bottom: var(--space-100);
     outline: none;
     overflow: hidden;
     padding: 0;
@@ -147,8 +151,11 @@
   }
 
   .grid {
-    background: #f5f6f7;
+    background: var(--color-bg-modal);
+    border-radius: var(--radius-200);
     margin: 0;
+    border: 1px solid #e2e4e6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
 
   .headerPadding {
@@ -156,9 +163,9 @@
   }
 
   .headerTitle {
-    color: #17394d;
-    font-size: 20px;
-    font-weight: bold;
+    color: #172b4d;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
     line-height: 24px;
   }
 
@@ -182,16 +189,16 @@
   }
 
   .moduleHeader {
-    color: #17394d;
-    font-size: 16px;
-    font-weight: bold;
+    color: #172b4d;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
     line-height: 20px;
-    margin: 0 0 4px;
-    padding: 8px 0;
+    margin: 0 0 var(--space-050);
+    padding: var(--space-100) 0;
   }
 
   .moduleIcon {
-    color: #17394d;
+    color: #6b808c;
     font-size: 17px;
     height: 32px;
     left: -40px;
@@ -205,28 +212,40 @@
   .moduleWrapper {
     margin: 0 0 0 40px;
     position: relative;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e2e4e6;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
   }
 
   .sidebarPadding {
-    padding: 8px 16px 0 8px;
+    padding: var(--space-100) var(--space-200) 0 var(--space-100);
+    border-left: 1px solid #e2e4e6;
+    padding-left: var(--space-200);
 
     @media only screen and (max-width: 797px) {
       align-items: flex-start;
+      border-left: none;
+      border-top: 1px solid #e2e4e6;
       display: flex;
       flex-flow: row wrap;
       gap: 10px;
-      padding-left: 16px;
+      padding-left: var(--space-200);
+      padding-top: var(--space-200);
       width: 100% !important;
     }
   }
 
   .text {
-    color: #6b808c;
-    font-size: 12px;
-    font-weight: bold;
+    color: #8c8c8c;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
     letter-spacing: 0.3px;
     line-height: 20px;
-    margin: 0 8px 4px 0;
+    margin: 0 var(--space-100) var(--space-050) 0;
     text-transform: uppercase;
   }
 

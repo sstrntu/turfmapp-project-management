@@ -1,18 +1,21 @@
 :global(#app) {
   .addButton {
     background: transparent;
+    border-radius: var(--radius-100);
     color: #fff;
     margin-right: 0;
     vertical-align: top;
+    transition: background var(--transition-fast);
 
     &:hover {
-      background: rgba(34, 36, 38, 0.3);
+      background: rgba(255, 255, 255, 0.1);
     }
   }
 
   .editButton {
     background: transparent;
     box-shadow: none;
+    border-radius: var(--radius-100);
     color: #fff;
     line-height: 32px;
     margin-right: 0;
@@ -22,31 +25,34 @@
     right: 2px;
     top: 2px;
     width: 32px;
+    transition: background var(--transition-fast);
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.12);
     }
   }
 
   .link {
-    color: rgba(255, 255, 255, 0.72);
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     display: block;
+    font-size: var(--font-size-md);
     line-height: 20px;
     padding: 10px 34px 6px 14px;
     text-overflow: ellipsis;
     max-width: 400px;
     overflow: hidden;
+    transition: color var(--transition-fast);
   }
 
   .tab {
-    border-radius: 3px 3px 0 0;
+    border-radius: var(--radius-100) var(--radius-100) 0 0;
     min-width: 100px;
     position: relative;
-    transition: all 0.1s ease;
+    transition: background var(--transition-normal);
 
     &:hover {
-      background: rgba(0, 0, 0, 0.24);
+      background: rgba(255, 255, 255, 0.08);
 
       .target {
         opacity: 1;
@@ -55,15 +61,15 @@
   }
 
   .tabActive {
-    background: rgba(0, 0, 0, 0.24);
+    background: rgba(255, 255, 255, 0.12);
 
     &:hover {
-      background: rgba(0, 0, 0, 0.32);
+      background: rgba(255, 255, 255, 0.16);
     }
 
     .link {
-      color: #fff;
-      font-weight: bold;
+      color: var(--color-text-inverse);
+      font-weight: var(--font-weight-semibold);
     }
   }
 
@@ -104,7 +110,7 @@
   }
 
   .wrapper {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;

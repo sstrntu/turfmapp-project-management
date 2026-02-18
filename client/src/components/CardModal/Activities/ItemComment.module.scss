@@ -1,6 +1,6 @@
 :global(#app) {
   .author {
-    color: #17394d;
+    color: #172b4d;
     display: inline-block;
     font-weight: bold;
     line-height: 20px;
@@ -8,7 +8,7 @@
   }
 
   .content {
-    border-bottom: 1px solid #092d4221;
+    border-bottom: 1px solid #dfe3e6;
     display: inline-block;
     padding-bottom: 14px;
     vertical-align: top;
@@ -16,19 +16,19 @@
   }
 
   .date {
-    color: #6b808c;
+    color: #8c8c8c;
     display: inline-block;
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     line-height: 20px;
   }
 
   .text {
-    background: #fff;
+    background: #f5f6f7;
     border-radius: 0px 8px 8px;
-    box-shadow: 0 1px 2px -1px rgba(9, 30, 66, 0.25),
-      0 0 0 1px rgba(9, 30, 66, 0.08);
+    box-shadow: 0 1px 2px -1px rgba(0, 0, 0, 0.15),
+      0 0 0 1px #e2e4e6;
     box-sizing: border-box;
-    color: #17394d;
+    color: #172b4d;
     display: inline-block;
     margin: 1px 2px 4px 1px;
     max-width: 100%;
@@ -43,7 +43,7 @@
     justify-content: space-between;
     position: sticky;
     top: -1em;
-    background: #f5f6f7;
+    background: #ffffff;
   }
 
   .user {

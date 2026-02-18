@@ -5,14 +5,14 @@
   }
 
   .field {
-    background: #fff;
-    border: 1px solid rgba(9, 30, 66, 0.13);
-    border-radius: 3px;
+    background: #ffffff;
+    border: 1px solid #e2e4e6;
+    border-radius: var(--radius-100);
     box-sizing: border-box;
-    color: #333;
+    color: #172b4d;
     display: block;
     line-height: 1.4;
-    font-size: 14px;
+    font-size: var(--font-size-md);
     margin-bottom: 4px;
     overflow: hidden;
     padding: 8px 12px;
@@ -21,6 +21,7 @@
 
     &:focus {
       outline: none;
+      border-color: #298fca;
     }
   }
 }

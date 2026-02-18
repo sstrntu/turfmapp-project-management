@@ -13,13 +13,13 @@
     width: 28px;
 
     &:hover {
-      background: rgba(9, 30, 66, 0.08);
+      background: #f5f6f7;
     }
   }
 
   .date {
     display: block;
-    color: #6b808c;
+    color: #8c8c8c;
     line-height: 20px;
     margin-bottom: 6px;
   }
@@ -32,7 +32,7 @@
   }
 
   .extension {
-    color: #5e6c84;
+    color: #8c8c8c;
     display: block;
     font-size: 18px;
     font-weight: bold;
@@ -48,8 +48,8 @@
   }
 
   .name {
-    color: #17394d;
-    font-size: 14px;
+    color: #172b4d;
+    font-size: var(--font-size-md);
     font-weight: bold;
     line-height: 20px;
     word-wrap: break-word;
@@ -58,7 +58,7 @@
   .option {
     background: none;
     border: none;
-    color: #6b808c;
+    color: #8c8c8c;
     cursor: pointer;
     outline: none;
     padding: 0;
@@ -78,14 +78,13 @@
 
   .options {
     display: block;
-    color: #6b808c;
+    color: #8c8c8c;
     line-height: 20px;
   }
 
   .thumbnail {
-    border-radius: 3px;
-    background: rgba(9, 30, 66, 0.04);
-    border-radius: 3px;
+    background: #f5f6f7;
+    border-radius: var(--radius-100);
     height: 80px;
     left: 0;
     margin-top: -40px;
@@ -97,7 +96,7 @@
   }
 
   .thumbnailLabel {
-    border-color: rgba(29, 46, 63, 0.8);
+    border-color: #e2e4e6;
   }
 
   .wrapper {
@@ -108,7 +107,8 @@
 
     &:hover {
       .details {
-        background: rgba(9, 30, 66, 0.04);
+        background: #f0f1f3;
+        border-radius: var(--radius-100);
       }
 
       .target {
@@ -118,6 +118,6 @@
   }
 
   .wrapperSubmitting {
-    background: rgba(9, 30, 66, 0.04);
+    background: #f5f6f7;
   }
 }

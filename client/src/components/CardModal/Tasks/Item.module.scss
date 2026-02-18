@@ -13,7 +13,7 @@
     width: 28px;
 
     &:hover {
-      background: rgba(9, 30, 66, 0.08);
+      background: #f5f6f7;
     }
   }
 
@@ -31,7 +31,8 @@
   }
 
   .contentHoverable:hover {
-    background: rgba(9, 30, 66, 0.04);
+    background: #f5f6f7;
+    border-radius: var(--radius-100);
 
     .target {
       opacity: 1;
@@ -48,14 +49,14 @@
   }
 
   .taskCompleted {
-    color: #aaa;
+    color: #c0c8d0;
     text-decoration: line-through;
   }
 
   .text {
     background: transparent;
     border-radius: 3px;
-    color: #17394d;
+    color: #172b4d;
     display: inline-block;
     font-size: 15px;
     line-height: 1.5;
@@ -69,7 +70,7 @@
   }
 
   .wrapper {
-    border-radius: 3px;
+    border-radius: var(--radius-100);
     cursor: auto;
     margin-left: -40px;
     min-height: 32px;

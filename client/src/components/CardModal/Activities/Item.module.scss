@@ -1,13 +1,13 @@
 :global(#app) {
   .author {
-    color: #17394d;
+    color: #172b4d;
     display: inline-block;
     font-weight: bold;
     line-height: 20px;
   }
 
   .content {
-    border-bottom: 1px solid #092d4221;
+    border-bottom: 1px solid #dfe3e6;
     display: inline-block;
     padding-bottom: 14px;
     vertical-align: top;
@@ -15,13 +15,14 @@
   }
 
   .date {
-    color: #6b808c;
+    color: #8c8c8c;
     display: inline-block;
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     line-height: 20px;
   }
 
   .text {
+    color: #6b808c;
     line-height: 20px;
   }
 

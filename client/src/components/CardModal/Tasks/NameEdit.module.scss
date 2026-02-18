@@ -5,13 +5,13 @@
   }
 
   .field {
-    background: #fff;
-    border: 1px solid rgba(9, 30, 66, 0.13);
-    border-radius: 3px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-100);
     box-sizing: border-box;
-    color: #17394d;
+    color: var(--color-text-primary);
     display: block;
-    font-size: 14px;
+    font-size: var(--font-size-md);
     line-height: 1.5;
     overflow: hidden;
     padding: 8px 12px;

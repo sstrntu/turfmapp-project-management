@@ -13,7 +13,7 @@
   .count {
     color: #8c8c8c;
     display: inline-block;
-    font-size: 14px;
+    font-size: var(--font-size-md);
     line-height: 14px;
     text-align: right;
     vertical-align: top;
@@ -23,8 +23,8 @@
   .taskButton {
     background: transparent;
     border: none;
-    border-radius: 3px;
-    color: #6b808c;
+    border-radius: var(--radius-100);
+    color: #8c8c8c;
     cursor: pointer;
     display: block;
     margin-top: 6px;
@@ -37,8 +37,8 @@
     width: 100%;
 
     &:hover {
-      background: rgba(9, 30, 66, 0.04);
-      color: #092d42;
+      background: #f5f6f7;
+      color: #172b4d;
     }
   }
 

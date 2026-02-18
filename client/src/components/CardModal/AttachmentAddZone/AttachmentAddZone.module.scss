@@ -1,11 +1,12 @@
 :global(#app) {
   .dropzone {
-    background: white;
+    background: rgba(255, 255, 255, 0.5);
+    color: #172b4d;
     font-size: 20px;
     font-weight: bold;
     height: 100%;
     line-height: 30px;
-    opacity: 0.7;
+    opacity: 1;
     padding: 200px 50px;
     position: absolute;
     text-align: center;

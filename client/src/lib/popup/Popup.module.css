@@ -1,6 +1,8 @@
 .closeButton {
   background: transparent !important;
+  border-radius: 8px;
   box-shadow: none !important;
+  color: var(--color-text-subtle) !important;
   margin: 0 !important;
   padding: 10px 12px 10px 8px !important;
   position: absolute;
@@ -8,13 +10,21 @@
   top: 0;
   width: 40px;
   z-index: 2000;
+  transition: background 100ms ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--color-text-primary) !important;
 }
 
 .wrapper {
-  border-radius: 3px !important;
+  background: var(--color-bg-list) !important;
+  border-radius: 12px !important;
   border-width: 0 !important;
-  box-shadow: 0 8px 16px -4px rgba(9, 45, 66, 0.25),
-    0 0 0 1px rgba(9, 45, 66, 0.08) !important;
+  box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+  color: var(--color-text-primary) !important;
   margin-top: 6px !important;
   max-height: calc(100% - 70px);
   padding: 0 12px 12px !important;

@@ -9,17 +9,17 @@
 
   .moduleHeader {
     align-items: center;
-    color: #17394d;
+    color: #172b4d;
     display: flex;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
     height: 36px;
     justify-content: space-between;
     margin: 0 0 4px;
   }
 
   .moduleIcon {
-    color: #17394d;
+    color: #6b808c;
     font-size: 17px;
     height: 32px;
     left: -40px;
@@ -38,7 +38,7 @@
   .toggleButton {
     background: transparent;
     box-shadow: none;
-    color: #6b808c;
+    color: #8c8c8c;
     float: right;
     font-weight: normal;
     margin-right: 0;
@@ -48,8 +48,8 @@
     transition: none;
 
     &:hover {
-      background: rgba(9, 30, 66, 0.08);
-      color: #092d42;
+      background: #f5f6f7;
+      color: #172b4d;
     }
   }
 

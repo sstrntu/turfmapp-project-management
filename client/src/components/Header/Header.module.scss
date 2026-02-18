@@ -2,16 +2,18 @@
   .editButton {
     background: transparent;
     box-shadow: none;
+    border-radius: var(--radius-100);
     color: #fff;
     font-size: 15px;
     line-height: 34px;
-    margin-left: 8px;
+    margin-left: var(--space-100);
     opacity: 0;
     padding: 0;
     width: 34px;
+    transition: background var(--transition-fast);
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.12);
     }
   }
 
@@ -34,18 +36,25 @@
     }
   }
 
-  .itemHoverable:hover {
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.32);
+  .itemHoverable {
+    border-radius: var(--radius-100);
+    transition: background var(--transition-fast);
+
+    &:hover {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+    }
   }
 
   .logo {
-    color: #fff;
+    color: var(--color-text-inverse);
     flex: 0 0 auto;
-    letter-spacing: 3.5px;
-    line-height: 50px;
-    padding: 0 16px;
+    letter-spacing: 2px;
+    line-height: var(--header-height);
+    padding: 0 var(--space-200);
     text-transform: uppercase;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-md);
     width: 130px;
 
     &:before {
@@ -56,8 +65,9 @@
   .logoLink {
     display: flex;
     align-items: center;
-    padding: 4px 16px;
+    padding: 4px var(--space-200);
     flex: 0 0 auto;
+    transition: opacity var(--transition-fast);
 
     &:hover {
       opacity: 0.8;
@@ -70,10 +80,10 @@
   }
 
   .logoText {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    margin-left: 12px;
+    color: var(--color-text-inverse);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-normal);
+    margin-left: var(--space-150);
     letter-spacing: 0.5px;
   }
 
@@ -82,20 +92,20 @@
     border: none;
     border-radius: 0;
     box-shadow: none;
-    color: #fff;
+    color: var(--color-text-inverse);
     flex: 1 1 auto;
-    height: 50px;
+    height: var(--header-height);
     margin: 0;
     width: 100%;
   }
 
   .notification {
-    background: #eb5a46;
-    border-radius: 8px;
-    color: #fff;
+    background: var(--color-accent-red);
+    border-radius: var(--radius-full);
+    color: var(--color-text-inverse);
     display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
     height: 16px;
     line-height: 16px;
     position: absolute;
@@ -106,8 +116,8 @@
   }
 
   .title {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
   }
 
   .userName {
@@ -120,8 +130,10 @@
   }
 
   .wrapper {
-    background: #000000;
+    background: var(--color-bg-primary);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
     display: flex;
     flex: 0 0 auto;
+    height: var(--header-height);
   }
 }

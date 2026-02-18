@@ -5,7 +5,9 @@
   }
 
   .menuItem {
+    border-radius: var(--radius-100);
     margin: 0;
     padding-left: 14px;
+    transition: background var(--transition-fast);
   }
 }

@@ -1,23 +1,24 @@
 :global(#app) {
   .addCardButton {
-    background: #dfe3e6;
+    background: transparent;
     border: none;
+    border-radius: 0 0 var(--radius-200) var(--radius-200);
     color: #6b808c;
     cursor: pointer;
     display: block;
     fill: #6b808c;
-    flex: 0 0 auto;
-    font-weight: normal;
+    font-weight: var(--font-weight-normal);
     height: 36px;
     outline: none;
-    padding: 8px;
+    padding: var(--space-100);
     text-align: left;
+    transition: background var(--transition-fast), color var(--transition-fast);
     width: 100%;
 
     &:hover {
-      background: #c3cbd0;
-      color: #17394d;
-      fill: #17394d;
+      background: rgba(0, 0, 0, 0.1);
+      color: #172b4d;
+      fill: #172b4d;
     }
   }
 
@@ -29,7 +30,7 @@
 
   .addCardButtonText {
     display: inline-block;
-    font-size: 14px;
+    font-size: var(--font-size-md);
     line-height: 20px;
     margin-left: 2px;
     vertical-align: top;
@@ -58,18 +59,19 @@
 
     &::-webkit-scrollbar-thumb {
       border-radius: 3px;
+      background: rgba(255, 255, 255, 0.15);
     }
   }
 
   .cardsOuterWrapper {
-    padding: 0 8px;
+    padding: 0 var(--space-100);
     white-space: normal;
-    width: 272px;
+    width: var(--list-width);
   }
 
   .header {
     outline: none;
-    padding: 6px 36px 4px 8px;
+    padding: var(--space-100) 36px var(--space-050) var(--space-100);
     position: relative;
 
     &:hover .target {
@@ -90,7 +92,8 @@
   .headerButton {
     background: none;
     box-shadow: none;
-    color: #798d99;
+    border-radius: var(--radius-100);
+    color: #9aa3ad;
     line-height: 32px;
     margin: 0;
     opacity: 0;
@@ -99,42 +102,44 @@
     right: 2px;
     top: 2px;
     width: 32px;
+    transition: background var(--transition-fast);
 
     &:hover {
-      background: rgba(9, 30, 66, 0.13);
-      color: #516b7a;
+      background: rgba(0, 0, 0, 0.1);
+      color: #172b4d;
     }
 
     @media only screen and (max-width: 797px) {
 
       &:focus,
       &:active {
-        background: rgba(9, 30, 66, 0.13);
-        color: #516b7a;
+        background: rgba(0, 0, 0, 0.1);
+        color: #172b4d;
       }
     }
   }
 
   .headerName {
-    color: #17394d;
-    font-weight: bold;
+    color: #ffffff;
+    font-weight: var(--font-weight-semibold);
     line-height: 20px;
     max-height: 256px;
     outline: none;
     overflow: hidden;
     overflow-wrap: break-word;
-    padding: 4px 8px;
+    padding: var(--space-050) var(--space-100);
     word-break: break-word;
   }
 
   .innerWrapper {
-    margin-right: 8px;
-    width: 272px;
+    margin-right: var(--space-100);
+    width: var(--list-width);
   }
 
   .outerWrapper {
-    background: #dfe3e6;
-    border-radius: 3px;
+    background: var(--color-bg-list);
+    border-radius: var(--radius-200);
+    box-shadow: var(--shadow-raised);
     display: flex;
     flex-direction: column;
     max-height: calc(100vh - 198px);
@@ -142,6 +147,6 @@
   }
 
   .outerWrapperHasOverdue {
-    background: #f5e6e6;
+    background: rgba(235, 90, 70, 0.12);
   }
 }

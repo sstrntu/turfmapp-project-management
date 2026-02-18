@@ -3,10 +3,7 @@
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     margin: 0;
-    /* color: #24292f;
-    background-color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    font-size: 16px; */
+    color: #172b4d;
     line-height: 1.5;
     word-wrap: break-word;
   }
@@ -48,7 +45,7 @@
 
   .markdown-body a {
     background-color: transparent;
-    color: #0969da;
+    color: #0066cc;
     text-decoration: none;
   }
 
@@ -76,12 +73,12 @@
     font-weight: bold; // 600
     padding-bottom: .3em;
     font-size: 2em;
-    border-bottom: 1px solid hsla(210, 18%, 87%, 1);
+    border-bottom: 1px solid var(--color-border-default);
   }
 
   .markdown-body mark {
     background-color: #fff8c5;
-    color: #24292f;
+    color: #172b4d;
   }
 
   .markdown-body small {
@@ -108,7 +105,7 @@
     border-style: none;
     max-width: 100%;
     box-sizing: content-box;
-    background-color: #ffffff;
+    background-color: transparent;
   }
 
   .markdown-body code,
@@ -127,7 +124,7 @@
     box-sizing: content-box;
     overflow: hidden;
     background: transparent;
-    border-bottom: 1px solid hsla(210, 18%, 87%, 1);
+    border-bottom: 1px solid var(--color-border-default);
     height: .25em;
     padding: 0;
     margin: 24px 0;
@@ -236,13 +233,13 @@
     padding: 3px 5px;
     font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     line-height: 10px;
-    color: #24292f;
+    color: #172b4d;
     vertical-align: middle;
-    background-color: #f6f8fa;
-    border: solid 1px rgba(175, 184, 193, 0.2);
-    border-bottom-color: rgba(175, 184, 193, 0.2);
+    background-color: #f5f6f7;
+    border: solid 1px #dfe3e6;
+    border-bottom-color: #dfe3e6;
     border-radius: 6px;
-    box-shadow: inset 0 -1px 0 rgba(175, 184, 193, 0.2);
+    box-shadow: inset 0 -1px 0 #dfe3e6;
   }
 
   .markdown-body h1,
@@ -261,7 +258,7 @@
     font-weight: bold; // 600
     padding-bottom: .3em;
     font-size: 1.5em;
-    border-bottom: 1px solid hsla(210, 18%, 87%, 1);
+    border-bottom: 1px solid var(--color-border-default);
   }
 
   .markdown-body h3 {
@@ -282,7 +279,7 @@
   .markdown-body h6 {
     font-weight: bold; // 600
     font-size: .85em;
-    color: #57606a;
+    color: #6b808c;
   }
 
   .markdown-body p {
@@ -293,8 +290,8 @@
   .markdown-body blockquote {
     margin: 0;
     padding: 0 1em;
-    color: #57606a;
-    border-left: .25em solid #d0d7de;
+    color: #6b808c;
+    border-left: .25em solid #dfe3e6;
   }
 
   .markdown-body ul,
@@ -369,7 +366,7 @@
 
   .markdown-body .pl-smi,
   .markdown-body .pl-s .pl-s1 {
-    color: #24292f;
+    color: #172b4d;
   }
 
   .markdown-body .pl-ent {
@@ -427,12 +424,12 @@
 
   .markdown-body .pl-mi {
     font-style: italic;
-    color: #24292f;
+    color: #172b4d;
   }
 
   .markdown-body .pl-mb {
     font-weight: bold;
-    color: #24292f;
+    color: #172b4d;
   }
 
   .markdown-body .pl-md {
@@ -461,7 +458,7 @@
   }
 
   .markdown-body .pl-ba {
-    color: #57606a;
+    color: #6b808c;
   }
 
   .markdown-body .pl-sg {
@@ -564,7 +561,7 @@
   .markdown-body h4 .octicon-link,
   .markdown-body h5 .octicon-link,
   .markdown-body h6 .octicon-link {
-    color: #24292f;
+    color: #172b4d;
     vertical-align: middle;
     visibility: hidden;
   }
@@ -665,16 +662,16 @@
   .markdown-body table th,
   .markdown-body table td {
     padding: 6px 13px;
-    border: 1px solid #d0d7de;
+    border: 1px solid var(--color-border-default);
   }
 
   .markdown-body table tr {
-    background-color: #ffffff;
-    border-top: 1px solid hsla(210, 18%, 87%, 1);
+    background-color: transparent;
+    border-top: 1px solid var(--color-border-default);
   }
 
   .markdown-body table tr:nth-child(2n) {
-    background-color: #f6f8fa;
+    background-color: rgba(255, 255, 255, 0.06);
   }
 
   .markdown-body table img {
@@ -707,7 +704,7 @@
     padding: 7px;
     margin: 13px 0 0;
     overflow: hidden;
-    border: 1px solid #d0d7de;
+    border: 1px solid var(--color-border-default);
   }
 
   .markdown-body span.frame span img {
@@ -719,7 +716,7 @@
     display: block;
     padding: 5px 0 0;
     clear: both;
-    color: #24292f;
+    color: #172b4d;
   }
 
   .markdown-body span.align-center {
@@ -829,7 +826,7 @@
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: #f6f8fa;
+    background-color: rgba(255, 255, 255, 0.06);
     border-radius: 6px;
   }
 
@@ -875,8 +872,8 @@
 
   .markdown-body .footnotes {
     font-size: 12px;
-    color: #57606a;
-    border-top: 1px solid #d0d7de;
+    color: #6b808c;
+    border-top: 1px solid #dfe3e6;
   }
 
   .markdown-body .footnotes ol {
@@ -900,7 +897,7 @@
   }
 
   .markdown-body .footnotes li:target {
-    color: #24292f;
+    color: #172b4d;
   }
 
   .markdown-body .footnotes .data-footnote-backref g-emoji {
