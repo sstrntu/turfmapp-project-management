@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-datepicker';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Dropdown } from 'semantic-ui-react';
 import { useDidUpdate, useToggle } from '../../lib/hooks';
 import { Input, Popup } from '../../lib/custom-ui';
 
@@ -11,7 +11,8 @@ import parseTime from '../../utils/parse-time';
 
 import styles from './DueDateEditStep.module.scss';
 
-const DueDateEditStep = React.memo(({ defaultValue, onUpdate, onBack, onClose }) => {
+const DueDateEditStep = React.memo(
+  ({ defaultValue, defaultReminder, onUpdate, onBack, onClose }) => {
   const [t] = useTranslation();
 
   const [data, handleFieldChange, setData] = useForm(() => {
@@ -26,6 +27,7 @@ const DueDateEditStep = React.memo(({ defaultValue, onUpdate, onBack, onClose })
         postProcess: 'formatDate',
         value: date,
       }),
+      reminder: defaultReminder !== undefined && defaultReminder !== null ? String(defaultReminder) : '1440',
     };
   });
 
@@ -81,12 +83,17 @@ const DueDateEditStep = React.memo(({ defaultValue, onUpdate, onBack, onClose })
       }
     }
 
-    if (!defaultValue || value.getTime() !== defaultValue.getTime()) {
-      onUpdate(value);
+    const reminderMinutes = data.reminder === 'null' ? null : parseInt(data.reminder, 10);
+
+    const dateChanged = !defaultValue || value.getTime() !== defaultValue.getTime();
+    const reminderChanged = reminderMinutes !== defaultReminder;
+
+    if (dateChanged || reminderChanged) {
+      onUpdate(value, reminderMinutes);
     }
 
     onClose();
-  }, [defaultValue, onUpdate, onClose, data, nullableDate, t]);
+  }, [defaultValue, defaultReminder, onUpdate, onClose, data, nullableDate, t]);
 
   const handleClearClick = useCallback(() => {
     if (defaultValue) {
@@ -129,6 +136,24 @@ const DueDateEditStep = React.memo(({ defaultValue, onUpdate, onBack, onClose })
             selected={nullableDate}
             onChange={handleDatePickerChange}
           />
+          <div className={styles.fieldWrapper}>
+            <div className={styles.text}>{t('common.reminder')}</div>
+            <Dropdown
+              fluid
+              selection
+              name="reminder"
+              value={data.reminder}
+              options={[
+                { key: 'null', value: 'null', text: t('common.none') },
+                { key: '15', value: '15', text: t('common.minutesBefore', { count: 15 }) },
+                { key: '60', value: '60', text: t('common.hoursBefore', { count: 1 }) },
+                { key: '1440', value: '1440', text: t('common.hoursBefore', { count: 24 }) },
+                { key: '2880', value: '2880', text: t('common.daysBefore', { count: 2 }) },
+                { key: '10080', value: '10080', text: t('common.weeksBefore', { count: 1 }) },
+              ]}
+              onChange={(e, { value }) => handleFieldChange({ target: { name: 'reminder', value } })}
+            />
+          </div>
           <Button positive content={t('action.save')} />
         </Form>
         <Button
@@ -140,10 +165,12 @@ const DueDateEditStep = React.memo(({ defaultValue, onUpdate, onBack, onClose })
       </Popup.Content>
     </>
   );
-});
+  },
+);
 
 DueDateEditStep.propTypes = {
   defaultValue: PropTypes.instanceOf(Date),
+  defaultReminder: PropTypes.number,
   onUpdate: PropTypes.func.isRequired,
   onBack: PropTypes.func,
   onClose: PropTypes.func.isRequired,
@@ -151,6 +178,7 @@ DueDateEditStep.propTypes = {
 
 DueDateEditStep.defaultProps = {
   defaultValue: undefined,
+  defaultReminder: 1440,
   onBack: undefined,
 };
 

@@ -33,6 +33,20 @@ module.exports = {
       allowNull: true,
       columnName: 'is_due_date_completed',
     },
+    dueDateReminderMinutes: {
+      type: 'number',
+      allowNull: true,
+      columnName: 'due_date_reminder_minutes',
+    },
+    isDueDateReminderSent: {
+      type: 'boolean',
+      columnName: 'is_due_date_reminder_sent',
+      defaultsTo: false,
+    },
+    color: {
+      type: 'string',
+      allowNull: true,
+    },
     stopwatch: {
       type: 'json',
     },

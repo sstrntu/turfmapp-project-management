@@ -90,6 +90,15 @@ const Card = React.memo(
 
     const ActionsPopup = usePopup(ActionsStep);
 
+    // Calculate overdue status
+    const now = new Date();
+    const isOverdue = dueDate && !isDueDateCompleted && new Date(dueDate) < now;
+    const isDueSoon =
+      dueDate &&
+      !isDueDateCompleted &&
+      new Date(dueDate) > now &&
+      new Date(dueDate).getTime() - now.getTime() <= 24 * 60 * 60 * 1000; // Within 24 hours
+
     const contentNode = (
       <>
         {coverUrl && <img src={coverUrl} alt="" className={styles.cover} />}
@@ -180,7 +189,12 @@ const Card = React.memo(
           // eslint-disable-next-line react/jsx-props-no-spreading
           <div {...draggableProps} {...dragHandleProps} ref={innerRef} className={styles.wrapper}>
             <NameEdit ref={nameEdit} defaultValue={name} onUpdate={handleNameUpdate}>
-              <div className={styles.card}>
+              <div
+                className={classNames(styles.card, {
+                  [styles.cardOverdue]: isOverdue,
+                  [styles.cardDueSoon]: isDueSoon && !isOverdue,
+                })}
+              >
                 {isPersisted ? (
                   <>
                     <Link

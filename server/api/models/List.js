@@ -28,6 +28,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    color: {
+      type: 'string',
+      allowNull: true,
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

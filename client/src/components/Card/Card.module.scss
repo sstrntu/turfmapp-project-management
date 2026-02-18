@@ -86,6 +86,16 @@
     }
   }
 
+  .cardDueSoon {
+    background: #ffe8d9 !important;  /* Light orange background */
+    border-left: 4px solid #f2711c;  /* Orange accent */
+  }
+
+  .cardOverdue {
+    background: #ffe0e0 !important;  /* Light red background */
+    border-left: 4px solid #db2828;  /* Red accent */
+  }
+
   .content {
     display: block;
 

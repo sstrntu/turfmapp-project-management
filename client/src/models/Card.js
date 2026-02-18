@@ -21,6 +21,9 @@ export default class extends BaseModel {
     }),
     dueDate: attr(),
     isDueDateCompleted: attr(),
+    dueDateReminderMinutes: attr(),
+    isDueDateReminderSent: attr(),
+    color: attr(),
     stopwatch: attr(),
     isSubscribed: attr({
       getDefault: () => false,
@@ -259,6 +262,8 @@ export default class extends BaseModel {
             'description',
             'dueDate',
             'isDueDateCompleted',
+            'dueDateReminderMinutes',
+            'isDueDateReminderSent',
             'stopwatch',
           ]),
           ...payload.card,

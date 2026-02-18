@@ -9,10 +9,12 @@ import List from '../components/List';
 const makeMapStateToProps = () => {
   const selectListById = selectors.makeSelectListById();
   const selectCardIdsByListId = selectors.makeSelectCardIdsByListId();
+  const selectHasOverdueCardsByListId = selectors.makeSelectHasOverdueCardsByListId();
 
   return (state, { id, index }) => {
-    const { name, isPersisted } = selectListById(state, id);
+    const { name, color, isPersisted } = selectListById(state, id);
     const cardIds = selectCardIdsByListId(state, id);
+    const hasOverdueCards = selectHasOverdueCardsByListId(state, id);
     const currentUserMembership = selectors.selectCurrentUserMembershipForCurrentBoard(state);
 
     const isCurrentUserEditor =
@@ -22,8 +24,10 @@ const makeMapStateToProps = () => {
       id,
       index,
       name,
+      color,
       isPersisted,
       cardIds,
+      hasOverdueCards,
       canEdit: isCurrentUserEditor,
     };
   };

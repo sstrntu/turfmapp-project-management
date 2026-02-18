@@ -1,0 +1,44 @@
+:global(#app) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .colorButton {
+    width: 40px;
+    height: 40px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .colorButtonActive {
+    border-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+}

@@ -40,6 +40,26 @@ const buildAndSendEmail = async (board, card, action, actorUser, notifiableUser)
       };
 
       break;
+    case Action.Types.DUE_DATE_REMINDER: {
+      const dueDate = new Date(action.data.dueDate);
+      const formattedDate = dueDate.toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+      });
+      emailData = {
+        subject: `Due date reminder: ${card.name} on ${board.name}`,
+        html:
+          `<p>This is a reminder that ` +
+          `<a href="${process.env.BASE_URL}/cards/${card.id}">${card.name}</a> ` +
+          `on <a href="${process.env.BASE_URL}/boards/${board.id}">${board.name}</a> ` +
+          `is due on ${formattedDate}</p>`,
+      };
+
+      break;
+    }
     default:
       return;
   }

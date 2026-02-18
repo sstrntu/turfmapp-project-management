@@ -20,8 +20,10 @@ const List = React.memo(
     id,
     index,
     name,
+    color,
     isPersisted,
     cardIds,
+    hasOverdueCards,
     canEdit,
     onUpdate,
     onDelete,
@@ -64,6 +66,15 @@ const List = React.memo(
     const handleCardAdd = useCallback(() => {
       setIsAddCardOpened(true);
     }, []);
+
+    const handleColorUpdate = useCallback(
+      (newColor) => {
+        onUpdate({
+          color: newColor,
+        });
+      },
+      [onUpdate],
+    );
 
     useEffect(() => {
       if (isAddCardOpened) {
@@ -109,7 +120,12 @@ const List = React.memo(
             ref={innerRef}
             className={styles.innerWrapper}
           >
-            <div className={styles.outerWrapper}>
+            <div
+              className={classNames(styles.outerWrapper, {
+                [styles.outerWrapperHasOverdue]: hasOverdueCards,
+              })}
+              style={color ? { backgroundColor: color } : {}}
+            >
               {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,
                                            jsx-a11y/no-static-element-interactions */}
               <div
@@ -122,10 +138,12 @@ const List = React.memo(
                 </NameEdit>
                 {isPersisted && canEdit && (
                   <ActionsPopup
+                    color={color}
                     onNameEdit={handleNameEdit}
                     onCardAdd={handleCardAdd}
                     onDelete={onDelete}
                     onSort={onSort}
+                    onColorUpdate={handleColorUpdate}
                   >
                     <Button className={classNames(styles.headerButton, styles.target)}>
                       <Icon fitted name="pencil" size="small" />
@@ -161,13 +179,19 @@ List.propTypes = {
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  color: PropTypes.string,
   isPersisted: PropTypes.bool.isRequired,
   cardIds: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  hasOverdueCards: PropTypes.bool.isRequired,
   canEdit: PropTypes.bool.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onSort: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onCardCreate: PropTypes.func.isRequired,
+};
+
+List.defaultProps = {
+  color: null,
 };
 
 export default List;

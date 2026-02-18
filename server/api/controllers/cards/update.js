@@ -84,6 +84,15 @@ module.exports = {
       type: 'boolean',
       allowNull: true,
     },
+    dueDateReminderMinutes: {
+      type: 'number',
+      allowNull: true,
+    },
+    color: {
+      type: 'string',
+      regex: /^#[0-9A-Fa-f]{6}$/,
+      allowNull: true,
+    },
     stopwatch: {
       type: 'json',
       custom: stopwatchValidator,
@@ -178,6 +187,8 @@ module.exports = {
       'description',
       'dueDate',
       'isDueDateCompleted',
+      'dueDateReminderMinutes',
+      'color',
       'stopwatch',
       'isSubscribed',
     ]);

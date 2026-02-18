@@ -40,9 +40,36 @@ export const makeSelectCardIdsByListId = () =>
 
 export const selectCardIdsByListId = makeSelectCardIdsByListId();
 
+export const makeSelectHasOverdueCardsByListId = () =>
+  createSelector(
+    orm,
+    (_, id) => id,
+    ({ List }, id) => {
+      const listModel = List.withId(id);
+
+      if (!listModel) {
+        return false;
+      }
+
+      const now = new Date();
+      return listModel
+        .getFilteredOrderedCardsModelArray()
+        .some(
+          (cardModel) =>
+            cardModel.dueDate &&
+            !cardModel.isDueDateCompleted &&
+            new Date(cardModel.dueDate) < now,
+        );
+    },
+  );
+
+export const selectHasOverdueCardsByListId = makeSelectHasOverdueCardsByListId();
+
 export default {
   makeSelectListById,
   selectListById,
   makeSelectCardIdsByListId,
   selectCardIdsByListId,
+  makeSelectHasOverdueCardsByListId,
+  selectHasOverdueCardsByListId,
 };

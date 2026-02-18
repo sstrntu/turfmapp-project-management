@@ -87,9 +87,10 @@ const ActionsStep = React.memo(
     }, [openStep]);
 
     const handleDueDateUpdate = useCallback(
-      (dueDate) => {
+      (dueDate, dueDateReminderMinutes) => {
         onUpdate({
           dueDate,
+          dueDateReminderMinutes,
         });
       },
       [onUpdate],
@@ -134,6 +135,7 @@ const ActionsStep = React.memo(
           return (
             <DueDateEditStep
               defaultValue={card.dueDate}
+              defaultReminder={card.dueDateReminderMinutes}
               onUpdate={handleDueDateUpdate}
               onBack={handleBack}
               onClose={onClose}

@@ -145,8 +145,14 @@ module.exports = {
       if (_.isNull(isDueDateCompleted)) {
         values.isDueDateCompleted = false;
       }
+
+      // Reset reminder sent flag when due date changes
+      if (!_.isUndefined(values.dueDate) && values.dueDate !== inputs.record.dueDate) {
+        values.isDueDateReminderSent = false;
+      }
     } else {
       values.isDueDateCompleted = null;
+      values.isDueDateReminderSent = false;
     }
 
     let card;
