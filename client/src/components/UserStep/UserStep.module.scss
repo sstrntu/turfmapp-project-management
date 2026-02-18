@@ -1,11 +1,21 @@
 :global(#app) {
   .menu {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     margin: -7px -12px -5px;
     width: calc(100% + 24px);
   }
 
   .menuItem {
+    color: var(--color-text-primary) !important;
     margin: 0;
     padding-left: 14px;
+    transition: background var(--transition-fast), color var(--transition-fast);
+
+    &:hover {
+      background: var(--color-bg-button) !important;
+      color: var(--color-text-primary) !important;
+    }
   }
 }

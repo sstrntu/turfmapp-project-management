@@ -44,13 +44,30 @@
   }
 
   .cardOverlay {
-    background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 20%, rgba(12, 28, 50, 0.34) 100%);
     border-radius: var(--radius-200);
     bottom: 0;
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 2;
+  }
+
+  .pastelTint {
+    background:
+      radial-gradient(circle at 16% 12%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 50%),
+      radial-gradient(circle at 84% 8%, rgba(255, 241, 250, 0.36) 0%, rgba(255, 241, 250, 0) 46%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.24) 0%, rgba(224, 247, 255, 0.2) 100%);
+    border-radius: var(--radius-200);
+    bottom: 0;
+    left: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
   }
 
   .cardsWrapper {
@@ -64,24 +81,96 @@
     margin: 0;
   }
 
+  .teamCalendar {
+    background: var(--color-bg-list);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-300);
+    box-shadow: var(--shadow-raised);
+    margin-top: var(--space-400);
+    padding: var(--space-300);
+  }
+
+  .calendarHeader {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-200);
+  }
+
+  .calendarTitle {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-xl);
+    margin: 0;
+  }
+
+  .calendarMonth {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .calendarGrid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .weekDay {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .calendarCell {
+    align-items: center;
+    aspect-ratio: 1/1;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-100);
+    color: var(--color-text-primary);
+    display: flex;
+    font-size: var(--font-size-md);
+    justify-content: center;
+    min-height: 34px;
+  }
+
+  .today {
+    background: rgba(41, 143, 202, 0.18);
+    border-color: var(--color-primary);
+    box-shadow: inset 0 0 0 1px rgba(41, 143, 202, 0.3);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .calendarNote {
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-sm);
+    margin: var(--space-200) 0 0;
+  }
+
   .notification {
     background: var(--color-accent-red);
     color: var(--color-text-inverse);
-    float: right;
     font-size: var(--font-size-sm);
     line-height: 20px;
     padding: 0px 6px;
     border: none;
     border-radius: var(--radius-100);
     outline: none;
-    text-align: left;
+    position: absolute;
+    right: 12px;
+    text-align: center;
+    top: 12px;
     transition: background 0.3s ease;
+    z-index: 5;
   }
 
   .open {
     background: var(--color-bg-list);
     box-shadow: var(--shadow-overlay);
     color: var(--color-text-inverse);
+    isolation: isolate;
     position: relative;
     transition: transform var(--transition-slow),
       box-shadow var(--transition-slow);
@@ -103,6 +192,7 @@
     position: absolute;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     word-break: break-word;
+    z-index: 4;
   }
 
   .project {
@@ -132,7 +222,7 @@
     right: 12px;
     top: 12px;
     transition: opacity var(--transition-normal), transform var(--transition-normal);
-    z-index: 10;
+    z-index: 5;
     border-radius: var(--radius-100);
 
     &:hover {

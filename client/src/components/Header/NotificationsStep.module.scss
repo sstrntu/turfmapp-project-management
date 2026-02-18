@@ -3,13 +3,14 @@
     padding: 12px;
 
     &:hover {
-      background: #f0f0f0;
+      background: var(--color-bg-button);
     }
   }
 
   .itemButton {
     background: transparent;
     box-shadow: none;
+    color: var(--color-icon-secondary);
     float: right;
     height: 20px;
     line-height: 20px;
@@ -20,7 +21,8 @@
     width: 20px;
 
     &:hover {
-      background: #e9e9e9;
+      background: var(--color-bg-button-hover);
+      color: var(--color-icon-primary);
     }
   }
 
@@ -66,6 +68,7 @@
   .deleteAllButton {
     background: transparent;
     box-shadow: none;
+    color: var(--color-icon-secondary);
     transition: background 0.3s ease;
 
     display: block;
@@ -74,7 +77,8 @@
     font-size: 0.875em;
 
     &:hover {
-      background: #e9e9e9;
+      background: var(--color-bg-button-hover);
+      color: var(--color-icon-primary);
     }
   }
 }

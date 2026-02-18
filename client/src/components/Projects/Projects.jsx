@@ -1,6 +1,6 @@
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,33 @@ import globalStyles from '../../styles.module.scss';
 const Projects = React.memo(({ items, canAdd, isAdmin, onAdd, onEditProject }) => {
   const [t] = useTranslation();
   const navigate = useNavigate();
+  const today = useMemo(() => new Date(), []);
+
+  const calendarData = useMemo(() => {
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    const cells = Array(firstDay).fill(null);
+
+    for (let day = 1; day <= totalDays; day += 1) {
+      cells.push(day);
+    }
+
+    return {
+      monthLabel: new Intl.DateTimeFormat(undefined, {
+        month: 'long',
+        year: 'numeric',
+      }).format(today),
+      weekDays: Array.from({ length: 7 }, (_, dayIndex) =>
+        new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(
+          new Date(2026, 1, 15 + dayIndex),
+        ),
+      ),
+      cells,
+      todayDay: today.getDate(),
+    };
+  }, [today]);
 
   const handleEditClick = useCallback(
     (e, item) => {
@@ -63,6 +90,7 @@ const Projects = React.memo(({ items, canAdd, isAdmin, onAdd, onEditProject }) =
                 {item.notificationsTotal > 0 && (
                   <span className={styles.notification}>{item.notificationsTotal}</span>
                 )}
+                <div className={styles.pastelTint} />
                 <div className={styles.cardOverlay} />
                 {isAdmin && (
                   <button
@@ -92,6 +120,30 @@ const Projects = React.memo(({ items, canAdd, isAdmin, onAdd, onEditProject }) =
           </Grid.Column>
         )}
       </Grid>
+      <section className={styles.teamCalendar} aria-label="Team calendar">
+        <div className={styles.calendarHeader}>
+          <h2 className={styles.calendarTitle}>Team Calendar</h2>
+          <span className={styles.calendarMonth}>{calendarData.monthLabel}</span>
+        </div>
+        <div className={styles.calendarGrid} role="grid">
+          {calendarData.weekDays.map((weekDay) => (
+            <div key={weekDay} className={styles.weekDay}>
+              {weekDay}
+            </div>
+          ))}
+          {calendarData.cells.map((day, index) => {
+            const key = day || `empty-${index}`;
+            const isToday = day === calendarData.todayDay;
+
+            return (
+              <div key={key} className={classNames(styles.calendarCell, isToday && styles.today)}>
+                {day ? <span>{day}</span> : null}
+              </div>
+            );
+          })}
+        </div>
+        <p className={styles.calendarNote}>Shared monthly view for everyone on the team.</p>
+      </section>
     </Container>
   );
 });

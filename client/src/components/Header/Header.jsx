@@ -43,12 +43,11 @@ const Header = React.memo(
     return (
       <div className={styles.wrapper}>
         {!project && (
-          <Link to={Paths.ROOT} className={styles.logoLink}>
-            <img src="/turfmapp-logo-white.png" alt="TURFMAPP" className={styles.logoImage} />
-            <span className={styles.logoText}>Project Management</span>
+          <Link to={Paths.ROOT} className={styles.brandLink}>
+            <span className={styles.brandTitle}>TURFMAPP PROJECT MANAGEMENT</span>
           </Link>
         )}
-        <Menu inverted size="large" className={styles.menu}>
+        <Menu size="large" className={styles.menu}>
           {project && (
             <Menu.Menu position="left">
               <Menu.Item

@@ -2,7 +2,7 @@
   background: transparent !important;
   border-radius: 8px;
   box-shadow: none !important;
-  color: var(--color-text-subtle) !important;
+  color: var(--color-icon-secondary) !important;
   margin: 0 !important;
   padding: 10px 12px 10px 8px !important;
   position: absolute;
@@ -14,16 +14,15 @@
 }
 
 .closeButton:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: var(--color-text-primary) !important;
+  background: var(--color-bg-button-hover) !important;
+  color: var(--color-icon-primary) !important;
 }
 
 .wrapper {
-  background: var(--color-bg-list) !important;
+  background: var(--color-bg-modal) !important;
   border-radius: 12px !important;
-  border-width: 0 !important;
-  box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--color-border-default) !important;
+  box-shadow: var(--shadow-modal) !important;
   color: var(--color-text-primary) !important;
   margin-top: 6px !important;
   max-height: calc(100% - 70px);

@@ -1,39 +1,59 @@
 :global {
   :root {
-    /* Colors: Dark theme (softened) */
-    --color-bg-primary: #1a1d21;
-    --color-bg-board: #22252a;
-    --color-bg-list: #2d3139;
+    /* Colors: Light theme (default) */
+    --color-bg-primary: #f6fbff;
+    --color-bg-board: #e9f3ff;
+    --color-bg-list: #d5e7ff;
     --color-bg-card: #ffffff;
-    --color-bg-card-hover: #f5f6f7;
+    --color-bg-card-hover: #f2f8ff;
     --color-bg-modal: #ffffff;
-    --color-bg-button: rgba(255, 255, 255, 0.08);
-    --color-bg-button-hover: rgba(255, 255, 255, 0.14);
+    --color-bg-button: rgba(20, 68, 125, 0.09);
+    --color-bg-button-hover: rgba(20, 68, 125, 0.16);
+    --color-bg-day-header: rgba(20, 68, 125, 0.08);
 
     /* Colors: Text */
-    --color-text-primary: #f0f1f3;
-    --color-text-secondary: #c0c8d0;
-    --color-text-subtle: #9aa3ad;
+    --color-text-primary: #0f2d4f;
+    --color-text-secondary: #2b4f79;
+    --color-text-subtle: #4c6d96;
     --color-text-inverse: #ffffff;
 
     /* Colors: Borders */
-    --color-border-default: rgba(255, 255, 255, 0.12);
-    --color-border-subtle: rgba(255, 255, 255, 0.06);
+    --color-border-default: rgba(15, 45, 79, 0.18);
+    --color-border-subtle: rgba(15, 45, 79, 0.1);
 
     /* Colors: Accents (preserved from existing) */
     --color-accent-red: #eb5a46;
     --color-accent-blue: #298fca;
     --color-accent-green: #21ba45;
     --color-accent-orange: #f2711c;
+    --color-primary: var(--color-accent-blue);
 
-    /* Shadows (dark-mode appropriate) */
-    --shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.3);
-    --shadow-overlay: 0 8px 16px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.3);
-    --shadow-modal: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 24px rgba(0, 0, 0, 0.5);
+    /* Shadows */
+    --shadow-raised: 0 1px 2px rgba(17, 56, 99, 0.16), 0 0 1px rgba(17, 56, 99, 0.18);
+    --shadow-overlay: 0 10px 20px rgba(17, 56, 99, 0.18), 0 0 1px rgba(17, 56, 99, 0.22);
+    --shadow-modal: 0 0 0 1px rgba(17, 56, 99, 0.1), 0 12px 28px rgba(17, 56, 99, 0.24);
+
+    /* Icons */
+    --color-icon-primary: #1f4f82;
+    --color-icon-secondary: #4c6f9a;
+    --color-icon-on-contrast: #ffffff;
+
+    /* Glass */
+    --glass-surface: rgba(255, 255, 255, 0.52);
+    --glass-border: rgba(165, 194, 230, 0.58);
+    --glass-highlight: rgba(255, 255, 255, 0.8);
+    --glass-pill: rgba(255, 255, 255, 0.34);
+    --glass-pill-hover: rgba(255, 255, 255, 0.55);
+
+    /* Scrollbars */
+    --scrollbar-thumb: rgba(20, 68, 125, 0.28);
+    --scrollbar-thumb-hover: rgba(20, 68, 125, 0.42);
+    --scrollbar-thumb-inactive: rgba(20, 68, 125, 0.16);
 
     /* Border Radius */
     --radius-100: 8px;
     --radius-200: 12px;
+    --radius-300: 16px;
     --radius-full: 24px;
 
     /* Typography */
@@ -67,28 +87,59 @@
     --list-width: 272px;
   }
 
-  /* Semantic UI dark-mode overrides */
+  :root[data-theme='dark'] {
+    --color-bg-primary: #0f1728;
+    --color-bg-board: #15233a;
+    --color-bg-list: #1d2f4c;
+    --color-bg-card: #213753;
+    --color-bg-card-hover: #2b4566;
+    --color-bg-modal: #1a2c44;
+    --color-bg-button: rgba(255, 255, 255, 0.1);
+    --color-bg-button-hover: rgba(255, 255, 255, 0.18);
+    --color-bg-day-header: rgba(255, 255, 255, 0.08);
+    --color-text-primary: #f5f8ff;
+    --color-text-secondary: #c7d6f1;
+    --color-text-subtle: #95abcf;
+    --color-border-default: rgba(181, 203, 239, 0.24);
+    --color-border-subtle: rgba(181, 203, 239, 0.12);
+    --shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.45), 0 0 1px rgba(0, 0, 0, 0.32);
+    --shadow-overlay: 0 10px 20px rgba(0, 0, 0, 0.45), 0 0 1px rgba(0, 0, 0, 0.32);
+    --shadow-modal: 0 0 0 1px rgba(181, 203, 239, 0.14), 0 12px 28px rgba(0, 0, 0, 0.55);
+    --color-icon-primary: #dce8ff;
+    --color-icon-secondary: #adc2e8;
+    --color-icon-on-contrast: #ffffff;
+    --glass-surface: rgba(16, 29, 50, 0.58);
+    --glass-border: rgba(189, 210, 243, 0.25);
+    --glass-highlight: rgba(255, 255, 255, 0.18);
+    --glass-pill: rgba(189, 210, 243, 0.14);
+    --glass-pill-hover: rgba(189, 210, 243, 0.24);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.15);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+    --scrollbar-thumb-inactive: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Semantic UI theme overrides */
   .ui.modal {
-    background: #ffffff !important;
-    color: #172b4d !important;
+    background: var(--color-bg-modal) !important;
+    color: var(--color-text-primary) !important;
     border-radius: var(--radius-200) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+    box-shadow: var(--shadow-modal) !important;
   }
 
   .ui.modal > .header {
-    background: #ffffff !important;
-    color: #172b4d !important;
-    border-bottom: 1px solid #e2e4e6 !important;
+    background: var(--color-bg-modal) !important;
+    color: var(--color-text-primary) !important;
+    border-bottom: 1px solid var(--color-border-default) !important;
   }
 
   .ui.modal > .content {
-    background: #ffffff !important;
-    color: #172b4d !important;
+    background: var(--color-bg-modal) !important;
+    color: var(--color-text-primary) !important;
   }
 
   .ui.modal > .actions {
-    background: #ffffff !important;
-    border-top: 1px solid #e2e4e6 !important;
+    background: var(--color-bg-modal) !important;
+    border-top: 1px solid var(--color-border-default) !important;
   }
 
   .ui.form .field > label {
@@ -102,7 +153,7 @@
   .ui.form input[type="password"],
   .ui.form textarea {
     background: var(--color-bg-card) !important;
-    color: #172b4d !important;
+    color: var(--color-text-primary) !important;
     border-color: var(--color-border-default) !important;
     border-radius: var(--radius-100) !important;
   }
@@ -113,7 +164,7 @@
   .ui.form input[type="email"]:focus,
   .ui.form input[type="password"]:focus,
   .ui.form textarea:focus {
-    color: #172b4d !important;
+    color: var(--color-text-primary) !important;
   }
 
   .ui.input > input::placeholder,
@@ -122,38 +173,64 @@
   .ui.form input[type="email"]::placeholder,
   .ui.form input[type="password"]::placeholder,
   .ui.form textarea::placeholder {
-    color: #9aa3ad !important;
+    color: var(--color-text-subtle) !important;
   }
 
   .ui.selection.dropdown {
-    background: #ffffff !important;
-    color: #172b4d !important;
-    border-color: #e2e4e6 !important;
+    background: var(--color-bg-card) !important;
+    color: var(--color-text-primary) !important;
+    border-color: var(--color-border-default) !important;
   }
 
   .ui.selection.dropdown .menu {
-    background: #ffffff !important;
-    border-color: #e2e4e6 !important;
+    background: var(--color-bg-card) !important;
+    border-color: var(--color-border-default) !important;
   }
 
   .ui.selection.dropdown .menu > .item {
-    color: #172b4d !important;
-    border-color: #f0f1f3 !important;
+    color: var(--color-text-primary) !important;
+    border-color: var(--color-border-subtle) !important;
   }
 
   .ui.selection.dropdown .menu > .item:hover {
-    background: #f5f6f7 !important;
+    background: var(--color-bg-card-hover) !important;
   }
 
   .ui.popup {
-    background: #ffffff !important;
-    color: #172b4d !important;
-    border: 1px solid #e2e4e6 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+    background: var(--color-bg-modal) !important;
+    color: var(--color-text-primary) !important;
+    border: 1px solid var(--color-border-default) !important;
+    box-shadow: var(--shadow-modal) !important;
+  }
+
+  .ui.popup:before {
+    background: var(--color-bg-modal) !important;
+    box-shadow: -1px -1px 0 0 var(--color-border-default) !important;
   }
 
   .ui.popup > .header {
-    color: #172b4d !important;
+    color: var(--color-text-primary) !important;
+  }
+
+  .ui.popup .ui.menu {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--color-text-primary) !important;
+  }
+
+  .ui.popup .ui.menu .item {
+    color: var(--color-text-primary) !important;
+  }
+
+  .ui.popup .ui.menu .item:hover {
+    background: var(--color-bg-button) !important;
+    color: var(--color-text-primary) !important;
+  }
+
+  .ui.popup .ui.menu .active.item {
+    background: var(--color-bg-button-hover) !important;
+    color: var(--color-text-primary) !important;
   }
 
   .ui.button {
@@ -162,10 +239,16 @@
 
   #app {
     background: var(--color-bg-board);
+    color: var(--color-text-primary);
     font-family: var(--font-family-primary);
 
     *:not(i):not(.icon):not(.icons) {
       font-family: var(--font-family-primary);
+    }
+
+    i.icon {
+      color: currentColor;
+      opacity: 1;
     }
 
     .react-datepicker {
@@ -229,7 +312,7 @@
     }
 
     .react-datepicker__day-names {
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--color-bg-day-header);
       border-top: 1px solid var(--color-border-default);
     }
 
@@ -296,18 +379,18 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--scrollbar-thumb);
     border-radius: var(--radius-100);
     cursor: pointer;
     transition: background var(--transition-fast);
   }
 
   ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--scrollbar-thumb-inactive);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--scrollbar-thumb-hover);
   }
 }
 
