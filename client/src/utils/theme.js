@@ -1,31 +1,32 @@
 const THEME_DARK = 'dark';
 const THEME_LIGHT = 'light';
+const THEME_STORAGE_KEY = 'turfmapp-theme';
 
-const getTimeBasedTheme = (date = new Date()) => {
-  const hour = date.getHours();
-
-  return hour >= 19 || hour < 6 ? THEME_DARK : THEME_LIGHT;
-};
-
-const getPreferredTheme = () => {
-  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-    return getTimeBasedTheme();
+const getStoredTheme = () => {
+  if (typeof window === 'undefined') {
+    return null;
   }
 
-  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  const lightQuery = window.matchMedia('(prefers-color-scheme: light)');
-  const supportsColorScheme = darkQuery.media !== 'not all' || lightQuery.media !== 'not all';
+  try {
+    const value = window.localStorage.getItem(THEME_STORAGE_KEY);
 
-  if (supportsColorScheme) {
-    return darkQuery.matches ? THEME_DARK : THEME_LIGHT;
+    if (value === THEME_DARK || value === THEME_LIGHT) {
+      return value;
+    }
+  } catch (error) {
+    return null;
   }
 
-  return getTimeBasedTheme();
+  return null;
 };
+
+const getPreferredTheme = () => getStoredTheme() || THEME_LIGHT;
 
 const applyTheme = (theme) => {
-  document.documentElement.dataset.theme = theme;
-  document.documentElement.style.colorScheme = theme;
+  const normalizedTheme = theme === THEME_DARK ? THEME_DARK : THEME_LIGHT;
+
+  document.documentElement.dataset.theme = normalizedTheme;
+  document.documentElement.style.colorScheme = normalizedTheme;
 };
 
 const initializeAutoTheme = () => {
@@ -33,39 +34,24 @@ const initializeAutoTheme = () => {
     return () => {};
   }
 
-  const setAutoTheme = () => applyTheme(getPreferredTheme());
-
-  setAutoTheme();
-
   if (typeof window === 'undefined') {
+    applyTheme(THEME_LIGHT);
     return () => {};
   }
 
-  if (typeof window.matchMedia !== 'function') {
-    const intervalId = window.setInterval(setAutoTheme, 60 * 1000);
-
-    return () => window.clearInterval(intervalId);
-  }
-
-  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  const lightQuery = window.matchMedia('(prefers-color-scheme: light)');
-  const supportsColorScheme = darkQuery.media !== 'not all' || lightQuery.media !== 'not all';
-
-  if (supportsColorScheme) {
-    const handleChange = () => setAutoTheme();
-
-    if (typeof darkQuery.addEventListener === 'function') {
-      darkQuery.addEventListener('change', handleChange);
-      return () => darkQuery.removeEventListener('change', handleChange);
+  const syncTheme = () => applyTheme(getPreferredTheme());
+  const handleStorageChange = (event) => {
+    if (!event || event.key === THEME_STORAGE_KEY) {
+      syncTheme();
     }
+  };
 
-    darkQuery.addListener(handleChange);
-    return () => darkQuery.removeListener(handleChange);
-  }
+  syncTheme();
+  window.addEventListener('storage', handleStorageChange);
 
-  const intervalId = window.setInterval(setAutoTheme, 60 * 1000);
-
-  return () => window.clearInterval(intervalId);
+  return () => {
+    window.removeEventListener('storage', handleStorageChange);
+  };
 };
 
 export default initializeAutoTheme;

@@ -120,7 +120,7 @@
   }
 
   .headerName {
-    color: #2f3a4a;
+    color: var(--color-text-primary);
     font-weight: var(--font-weight-semibold);
     line-height: 20px;
     max-height: 256px;
