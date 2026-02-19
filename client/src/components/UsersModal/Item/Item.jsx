@@ -14,6 +14,7 @@ const Item = React.memo(
     username,
     name,
     avatarUrl,
+    skills,
     organization,
     phone,
     isAdmin,
@@ -33,6 +34,8 @@ const Item = React.memo(
     onPasswordUpdateMessageDismiss,
     onDelete,
   }) => {
+    const skillsText = Array.isArray(skills) && skills.length > 0 ? skills.join(', ') : '-';
+
     const handleIsAdminChange = useCallback(() => {
       onUpdate({
         isAdmin: !isAdmin,
@@ -49,6 +52,7 @@ const Item = React.memo(
         <Table.Cell>{name}</Table.Cell>
         <Table.Cell>{username || '-'}</Table.Cell>
         <Table.Cell>{email}</Table.Cell>
+        <Table.Cell>{skillsText}</Table.Cell>
         <Table.Cell>
           <Radio toggle checked={isAdmin} disabled={isRoleLocked} onChange={handleIsAdminChange} />
         </Table.Cell>
@@ -58,6 +62,7 @@ const Item = React.memo(
               email,
               username,
               name,
+              skills,
               organization,
               phone,
               isAdmin,
@@ -92,6 +97,7 @@ Item.propTypes = {
   username: PropTypes.string,
   name: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string,
+  skills: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   organization: PropTypes.string,
   phone: PropTypes.string,
   isAdmin: PropTypes.bool.isRequired,
@@ -117,6 +123,7 @@ Item.propTypes = {
 Item.defaultProps = {
   username: undefined,
   avatarUrl: undefined,
+  skills: undefined,
   organization: undefined,
   phone: undefined,
 };

@@ -5,6 +5,44 @@ const Errors = {
 };
 
 const avatarUrlValidator = (value) => _.isNull(value);
+const MAX_SKILLS = 25;
+const MAX_SKILL_LENGTH = 64;
+
+const normalizeSkills = (skills) => {
+  if (!_.isArray(skills)) {
+    return [];
+  }
+
+  const unique = new Set();
+
+  return skills.reduce((result, skillValue) => {
+    const skill = String(skillValue || '').trim();
+
+    if (!skill) {
+      return result;
+    }
+
+    const key = skill.toLowerCase();
+
+    if (unique.has(key)) {
+      return result;
+    }
+
+    unique.add(key);
+    result.push(skill);
+
+    return result;
+  }, []);
+};
+
+const skillsValidator = (value) =>
+  _.isNull(value) ||
+  (_.isArray(value) &&
+    value.length <= MAX_SKILLS &&
+    value.every(
+      (skill) =>
+        _.isString(skill) && skill.trim().length > 0 && skill.trim().length <= MAX_SKILL_LENGTH,
+    ));
 
 module.exports = {
   inputs: {
@@ -33,6 +71,10 @@ module.exports = {
       type: 'string',
       isNotEmptyString: true,
       allowNull: true,
+    },
+    skills: {
+      type: 'json',
+      custom: skillsValidator,
     },
     language: {
       type: 'string',
@@ -91,6 +133,10 @@ module.exports = {
       ]),
       avatar: inputs.avatarUrl,
     };
+
+    if (!_.isUndefined(inputs.skills)) {
+      values.skills = normalizeSkills(inputs.skills);
+    }
 
     user = await sails.helpers.users.updateOne.with({
       values,

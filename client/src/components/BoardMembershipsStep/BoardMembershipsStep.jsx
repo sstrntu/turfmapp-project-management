@@ -17,12 +17,18 @@ const BoardMembershipsStep = React.memo(
 
     const filteredItems = useMemo(
       () =>
-        items.filter(
-          ({ user }) =>
-            user.email.includes(cleanSearch) ||
+        items.filter(({ user }) => {
+          const skillsText = Array.isArray(user.skills) ? user.skills.join(' ').toLowerCase() : '';
+          const emailText = String(user.email || '').toLowerCase();
+          const usernameText = String(user.username || '').toLowerCase();
+
+          return (
+            emailText.includes(cleanSearch) ||
             user.name.toLowerCase().includes(cleanSearch) ||
-            (user.username && user.username.includes(cleanSearch)),
-        ),
+            usernameText.includes(cleanSearch) ||
+            skillsText.includes(cleanSearch)
+          );
+        }),
       [items, cleanSearch],
     );
 

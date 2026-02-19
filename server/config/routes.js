@@ -99,6 +99,10 @@ module.exports.routes = {
   'PATCH /api/board-memberships/:id': 'board-memberships/update',
   'DELETE /api/board-memberships/:id': 'board-memberships/delete',
 
+  'POST /api/boards/:boardId/milestones': 'board-milestones/create',
+  'PATCH /api/board-milestones/:id': 'board-milestones/update',
+  'DELETE /api/board-milestones/:id': 'board-milestones/delete',
+
   'POST /api/boards/:boardId/labels': 'labels/create',
   'PATCH /api/labels/:id': 'labels/update',
   'DELETE /api/labels/:id': 'labels/delete',
@@ -139,6 +143,15 @@ module.exports.routes = {
   'PATCH /api/notifications/:ids': 'notifications/update',
 
   'GET /api/analytics': 'analytics/index',
+
+  'POST /api/ai/chat': 'ai/chat',
+  'POST /api/ai/ingest/image': 'ai/ingest-image',
+  'POST /api/ai/ingest/audio': 'ai/ingest-audio',
+  'POST /api/ai/tts': 'ai/tts',
+  'POST /api/ai/confirm': 'ai/confirm',
+  'GET /api/ai/voice-context': 'ai/voice-context',
+  'POST /api/ai/voice-execute': 'ai/voice-execute',
+  'GET /api/ai/sessions/:sessionId/history': 'ai/history',
 
   'GET /api/archives': 'archives/index',
 

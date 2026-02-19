@@ -94,6 +94,82 @@ export const selectProjectsToListsForCurrentUser = createSelector(
   },
 );
 
+export const selectDueCardsForCurrentUser = createSelector(
+  orm,
+  (state) => selectCurrentUserId(state),
+  ({ User }, id) => {
+    if (!id) {
+      return [];
+    }
+
+    const userModel = User.withId(id);
+
+    if (!userModel) {
+      return [];
+    }
+
+    const dueCards = [];
+
+    userModel.getOrderedAvailableProjectsModelArray().forEach((projectModel) => {
+      projectModel
+        .getOrderedBoardsModelArrayAvailableForUser(userModel.id)
+        .forEach((boardModel) => {
+          boardModel.cards.toModelArray().forEach((cardModel) => {
+            if (!cardModel.dueDate) {
+              return;
+            }
+
+            dueCards.push({
+              ...cardModel.ref,
+              projectId: projectModel.id,
+              projectName: projectModel.name,
+              boardId: boardModel.id,
+              boardName: boardModel.name,
+            });
+          });
+        });
+    });
+
+    return dueCards;
+  },
+);
+
+export const selectMilestonesForCurrentUser = createSelector(
+  orm,
+  (state) => selectCurrentUserId(state),
+  ({ User }, id) => {
+    if (!id) {
+      return [];
+    }
+
+    const userModel = User.withId(id);
+
+    if (!userModel) {
+      return [];
+    }
+
+    const milestones = [];
+
+    userModel.getOrderedAvailableProjectsModelArray().forEach((projectModel) => {
+      projectModel
+        .getOrderedBoardsModelArrayAvailableForUser(userModel.id)
+        .forEach((boardModel) => {
+          boardModel.milestones.toModelArray().forEach((milestoneModel) => {
+            milestones.push({
+              ...milestoneModel.ref,
+              boardId: boardModel.id,
+              boardName: boardModel.name,
+              projectId: projectModel.id,
+              projectName: projectModel.name,
+            });
+          });
+        });
+    });
+
+    return milestones;
+  },
+);
+
 export const selectNotificationsForCurrentUser = createSelector(
   orm,
   (state) => selectCurrentUserId(state),
@@ -129,5 +205,7 @@ export default {
   selectCurrentUser,
   selectProjectsForCurrentUser,
   selectProjectsToListsForCurrentUser,
+  selectDueCardsForCurrentUser,
+  selectMilestonesForCurrentUser,
   selectNotificationsForCurrentUser,
 };

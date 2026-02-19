@@ -21,12 +21,18 @@ const AddStep = React.memo(
 
     const filteredUsers = useMemo(
       () =>
-        users.filter(
-          (user) =>
-            user.email.includes(cleanSearch) ||
+        users.filter((user) => {
+          const skillsText = Array.isArray(user.skills) ? user.skills.join(' ').toLowerCase() : '';
+          const emailText = String(user.email || '').toLowerCase();
+          const usernameText = String(user.username || '').toLowerCase();
+
+          return (
+            emailText.includes(cleanSearch) ||
             user.name.toLowerCase().includes(cleanSearch) ||
-            (user.username && user.username.includes(cleanSearch)),
-        ),
+            usernameText.includes(cleanSearch) ||
+            skillsText.includes(cleanSearch)
+          );
+        }),
       [users, cleanSearch],
     );
 
@@ -114,6 +120,7 @@ const AddStep = React.memo(
                   key={user.id}
                   name={user.name}
                   avatarUrl={user.avatarUrl}
+                  skills={user.skills}
                   isActive={currentUserIds.includes(user.id)}
                   onSelect={() => handleUserSelect(user.id)}
                 />

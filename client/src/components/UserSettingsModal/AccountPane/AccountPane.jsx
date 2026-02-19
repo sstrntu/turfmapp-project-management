@@ -22,6 +22,7 @@ const AccountPane = React.memo(
     avatarUrl,
     phone,
     organization,
+    skills,
     language,
     isLocked,
     isUsernameLocked,
@@ -75,6 +76,7 @@ const AccountPane = React.memo(
             name,
             phone,
             organization,
+            skills,
           }}
           isNameEditable={!isLocked}
           onUpdate={onUpdate}
@@ -184,6 +186,7 @@ AccountPane.propTypes = {
   avatarUrl: PropTypes.string,
   phone: PropTypes.string,
   organization: PropTypes.string,
+  skills: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   language: PropTypes.string,
   isLocked: PropTypes.bool.isRequired,
   isUsernameLocked: PropTypes.bool.isRequired,
@@ -209,6 +212,7 @@ AccountPane.defaultProps = {
   avatarUrl: undefined,
   phone: undefined,
   organization: undefined,
+  skills: undefined,
   language: undefined,
 };
 

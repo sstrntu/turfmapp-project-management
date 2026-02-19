@@ -18,16 +18,33 @@
   }
 
   .menuItemText {
-    display: inline-block;
-    line-height: 32px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 32px;
     position: relative;
     width: calc(100% - 40px);
+  }
+
+  .primaryText {
+    color: #222222;
+    line-height: 1.2;
+  }
+
+  .skillsText {
+    color: #6f7a88;
+    font-size: 11px;
+    line-height: 1.2;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .menuItemTextActive:before {
     bottom: 2px;
     color: #798d99;
-    content: "Г";
+    content: 'Г';
     font-size: 18px;
     font-weight: normal;
     line-height: 36px;

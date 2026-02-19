@@ -1,6 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
-  <!-- Hexagonal icon with T cutout -->
-  <path d="M100 20 L170 60 L170 140 L100 180 L30 140 L30 60 Z" fill="#000000"/>
-  <!-- T shape cutout (white) -->
-  <path d="M60 70 L140 70 L140 90 L115 90 L115 150 L85 150 L85 90 L60 90 Z" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <path
+    fill="#000000"
+    d="M126 22 206 68v120l-80 46-80-46V68l80-46Z"
+  />
+  <path fill="#000000" d="M50 79 134 29l28 16-84 50-28-16Z" />
+  <path fill="#FFFFFF" d="M85 100 149 62l20 12-84 50V100Z" />
+  <path fill="#FFFFFF" d="m113 126 24-14 41 69-24 14-41-69Z" />
 </svg>

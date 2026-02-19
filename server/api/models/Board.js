@@ -52,5 +52,9 @@ module.exports = {
       collection: 'Label',
       via: 'boardId',
     },
+    milestones: {
+      collection: 'BoardMilestone',
+      via: 'boardId',
+    },
   },
 };

@@ -135,6 +135,8 @@ export default {
       optional_inline: 'optional',
       organization: 'Organization',
       phone: 'Phone',
+      skills: 'Skills',
+      addSkillsPlaceholder: 'Add skills (e.g. Graphic Designer)',
       preferences: 'Preferences',
       pressPasteShortcutToAddAttachmentFromClipboard:
         'Tip: press Ctrl-V (Cmd-V on Mac) to add an attachment from the clipboard.',

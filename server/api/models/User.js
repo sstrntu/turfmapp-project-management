@@ -41,6 +41,26 @@ const OIDC = {
   id: '_oidc',
 };
 
+const normalizeSkillsForOutput = (skills) => {
+  if (_.isArray(skills)) {
+    return skills;
+  }
+
+  if (_.isString(skills)) {
+    try {
+      const parsedSkills = JSON.parse(skills);
+
+      if (_.isArray(parsedSkills)) {
+        return parsedSkills;
+      }
+    } catch (error) {
+      // Ignore parse errors and fall back to empty skills.
+    }
+  }
+
+  return [];
+};
+
 module.exports = {
   LANGUAGES,
   OIDC,
@@ -92,6 +112,11 @@ module.exports = {
       type: 'string',
       isNotEmptyString: true,
       allowNull: true,
+    },
+    skills: {
+      type: 'json',
+      columnName: 'skills',
+      defaultsTo: [],
     },
     language: {
       type: 'string',
@@ -154,6 +179,7 @@ module.exports = {
 
     return {
       ..._.omit(this, ['password', 'isSso', 'avatar', 'passwordChangedAt']),
+      skills: normalizeSkillsForOutput(this.skills),
       isLocked: this.isSso || isDefaultAdmin,
       isRoleLocked: (this.isSso && !sails.config.custom.oidcIgnoreRoles) || isDefaultAdmin,
       isUsernameLocked: (this.isSso && !sails.config.custom.oidcIgnoreUsername) || isDefaultAdmin,

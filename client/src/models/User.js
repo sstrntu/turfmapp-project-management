@@ -41,6 +41,9 @@ export default class extends BaseModel {
     avatarUrl: attr(),
     phone: attr(),
     organization: attr(),
+    skills: attr({
+      getDefault: () => [],
+    }),
     language: attr(),
     subscribeToOwnCards: attr(),
     isAdmin: attr(),

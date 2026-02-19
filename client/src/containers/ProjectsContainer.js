@@ -9,9 +9,15 @@ const mapStateToProps = (state) => {
   const { allowAllToCreateProjects } = selectors.selectConfig(state);
   const { isAdmin } = selectors.selectCurrentUser(state);
   const projects = selectors.selectProjectsForCurrentUser(state);
+  const calendarDueCards = selectors.selectDueCardsForCurrentUser(state);
+  const calendarMilestones = selectors.selectMilestonesForCurrentUser(state);
+  const projectsToLists = selectors.selectProjectsToListsForCurrentUser(state);
 
   return {
     items: projects,
+    calendarDueCards,
+    calendarMilestones,
+    projectsToLists,
     canAdd: allowAllToCreateProjects || isAdmin,
     isAdmin,
   };

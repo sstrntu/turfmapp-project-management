@@ -93,9 +93,10 @@ const UsersModal = React.memo(
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell />
-                <Table.HeaderCell width={4}>{t('common.name')}</Table.HeaderCell>
-                <Table.HeaderCell width={4}>{t('common.username')}</Table.HeaderCell>
-                <Table.HeaderCell width={4}>{t('common.email')}</Table.HeaderCell>
+                <Table.HeaderCell width={3}>{t('common.name')}</Table.HeaderCell>
+                <Table.HeaderCell width={3}>{t('common.username')}</Table.HeaderCell>
+                <Table.HeaderCell width={3}>{t('common.email')}</Table.HeaderCell>
+                <Table.HeaderCell width={4}>{t('common.skills')}</Table.HeaderCell>
                 <Table.HeaderCell>{t('common.administrator')}</Table.HeaderCell>
                 <Table.HeaderCell />
               </Table.Row>
@@ -108,6 +109,7 @@ const UsersModal = React.memo(
                   username={item.username}
                   name={item.name}
                   avatarUrl={item.avatarUrl}
+                  skills={item.skills}
                   organization={item.organization}
                   phone={item.phone}
                   isAdmin={item.isAdmin}
